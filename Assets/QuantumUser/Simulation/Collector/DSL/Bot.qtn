@@ -1,0 +1,15 @@
+component Bot
+{
+    Input Input;
+}
+
+input
+{
+    FPVector2 Movement;
+}
+
+global
+{
+    FP FillRoomTimer;
+    bool AlreadyFilledRoom;
+}

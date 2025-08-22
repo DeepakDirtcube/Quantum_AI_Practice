@@ -511,13 +511,14 @@ namespace Quantum {
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Input {
-    public const Int32 SIZE = 4;
-    public const Int32 ALIGNMENT = 4;
+    public const Int32 SIZE = 16;
+    public const Int32 ALIGNMENT = 8;
     [FieldOffset(0)]
-    private fixed Byte _alignment_padding_[4];
+    public FPVector2 Movement;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 19249;
+        hash = hash * 31 + Movement.GetHashCode();
         return hash;
       }
     }
@@ -536,11 +537,12 @@ namespace Quantum {
     }
     static partial void SerializeCodeGen(void* ptr, FrameSerializer serializer) {
         var p = (Input*)ptr;
+        FPVector2.Serialize(&p->Movement, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct _globals_ {
-    public const Int32 SIZE = 640;
+    public const Int32 SIZE = 728;
     public const Int32 ALIGNMENT = 8;
     [FieldOffset(0)]
     public AssetRef<Map> Map;
@@ -562,14 +564,18 @@ namespace Quantum {
     public PhysicsSceneSettings PhysicsSettings;
     [FieldOffset(600)]
     public Int32 PlayerConnectedCount;
-    [FieldOffset(604)]
+    [FieldOffset(608)]
     [FramePrinter.FixedArrayAttribute(typeof(Input), 6)]
-    private fixed Byte _input_[24];
-    [FieldOffset(632)]
+    private fixed Byte _input_[96];
+    [FieldOffset(704)]
     public BitSet6 PlayerLastConnectionState;
+    [FieldOffset(720)]
+    public FP FillRoomTimer;
+    [FieldOffset(712)]
+    public QBoolean AlreadyFilledRoom;
     public readonly FixedArray<Input> input {
       get {
-        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 4, 6); }
+        fixed (byte* p = _input_) { return new FixedArray<Input>(p, 16, 6); }
       }
     }
     public override readonly Int32 GetHashCode() {
@@ -587,6 +593,8 @@ namespace Quantum {
         hash = hash * 31 + PlayerConnectedCount.GetHashCode();
         hash = hash * 31 + HashCodeUtils.GetArrayHashCode(input);
         hash = hash * 31 + PlayerLastConnectionState.GetHashCode();
+        hash = hash * 31 + FillRoomTimer.GetHashCode();
+        hash = hash * 31 + AlreadyFilledRoom.GetHashCode();
         return hash;
       }
     }
@@ -604,6 +612,26 @@ namespace Quantum {
         serializer.Stream.Serialize(&p->PlayerConnectedCount);
         FixedArray.Serialize(p->input, serializer, Statics.SerializeInput);
         Quantum.BitSet6.Serialize(&p->PlayerLastConnectionState, serializer);
+        QBoolean.Serialize(&p->AlreadyFilledRoom, serializer);
+        FP.Serialize(&p->FillRoomTimer, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct Bot : Quantum.IComponent {
+    public const Int32 SIZE = 16;
+    public const Int32 ALIGNMENT = 8;
+    [FieldOffset(0)]
+    public Input Input;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 419;
+        hash = hash * 31 + Input.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (Bot*)ptr;
+        Quantum.Input.Serialize(&p->Input, serializer);
     }
   }
   public static unsafe partial class Constants {
@@ -626,6 +654,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<AIBlackboardComponent>();
       BuildSignalsArrayOnComponentAdded<BTAgent>();
       BuildSignalsArrayOnComponentRemoved<BTAgent>();
+      BuildSignalsArrayOnComponentAdded<Quantum.Bot>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.Bot>();
       BuildSignalsArrayOnComponentAdded<BotSDKGlobals>();
       BuildSignalsArrayOnComponentRemoved<BotSDKGlobals>();
       BuildSignalsArrayOnComponentAdded<CharacterController2D>();
@@ -674,6 +704,7 @@ namespace Quantum {
     partial void SetPlayerInputCodeGen(PlayerRef player, Input input) {
       if ((int)player >= (int)_globals->input.Length) { throw new System.ArgumentOutOfRangeException("player"); }
       var i = _globals->input.GetPointer(player);
+      i->Movement = input.Movement;
     }
     public Input* GetPlayerInput(PlayerRef player) {
       if ((int)player >= (int)_globals->input.Length) { throw new System.ArgumentOutOfRangeException("player"); }
@@ -706,6 +737,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum.BitSet4096), Quantum.BitSet4096.SIZE);
       typeRegistry.Register(typeof(Quantum.BitSet512), Quantum.BitSet512.SIZE);
       typeRegistry.Register(typeof(Quantum.BitSet6), Quantum.BitSet6.SIZE);
+      typeRegistry.Register(typeof(Quantum.Bot), Quantum.Bot.SIZE);
       typeRegistry.Register(typeof(BotSDKGlobals), BotSDKGlobals.SIZE);
       typeRegistry.Register(typeof(Button), Button.SIZE);
       typeRegistry.Register(typeof(CallbackFlags), 4);
@@ -785,10 +817,11 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 5)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 6)
         .AddBuiltInComponents()
         .Add<AIBlackboardComponent>(AIBlackboardComponent.Serialize, AIBlackboardComponent.OnAdded, AIBlackboardComponent.OnRemoved, ComponentFlags.None)
         .Add<BTAgent>(BTAgent.Serialize, BTAgent.OnAdded, BTAgent.OnRemoved, ComponentFlags.None)
+        .Add<Quantum.Bot>(Quantum.Bot.Serialize, null, null, ComponentFlags.None)
         .Add<BotSDKGlobals>(BotSDKGlobals.Serialize, BotSDKGlobals.OnAdded, BotSDKGlobals.OnRemoved, ComponentFlags.Singleton)
         .Add<HFSMAgent>(HFSMAgent.Serialize, HFSMAgent.OnAdded, HFSMAgent.OnRemoved, ComponentFlags.None)
         .Add<UTAgent>(UTAgent.Serialize, UTAgent.OnAdded, UTAgent.OnRemoved, ComponentFlags.None)
