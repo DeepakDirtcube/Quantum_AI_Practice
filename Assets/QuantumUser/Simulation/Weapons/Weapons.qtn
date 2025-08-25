@@ -1,0 +1,79 @@
+component Weapons
+{
+	array<asset_ref<EntityPrototype>>[4] WeaponPrototypes;
+
+	LayerMask HitMask;
+	FP        WeaponSwitchTime;
+
+	[ExcludeFromPrototype]
+	byte      CurrentWeaponId;
+	[ExcludeFromPrototype]
+	byte      PendingWeaponId;
+	[ExcludeFromPrototype]
+	FP        FireCooldown;
+	[ExcludeFromPrototype]
+	FP        ReloadCooldown;
+	[ExcludeFromPrototype]
+	FP        SwitchCooldown;
+
+	[ExcludeFromPrototype]
+	array<EntityRef>[4] WeaponRefs;
+}
+
+component Weapon
+{
+	bool      IsAutomatic;
+	int       ClipAmmo;
+	int       MaxClipAmmo;
+	int       RemainingAmmo;
+	int       MaxRemainingAmmo;
+	FP        ReloadTime;
+
+	FP        Damage;
+	int       FireRate;
+	int       ProjectilesPerShot;
+	FP        Dispersion;
+	FP        MaxHitDistance;
+
+	[ExcludeFromPrototype]
+	bool      IsCollected;
+	[ExcludeFromPrototype]
+	bool      IsReloading;
+}
+
+signal SwitchWeapon(EntityRef playerEntity, byte weaponId);
+
+event WeaponFired
+{
+	byte WeaponId;
+	EntityRef PlayerEntity;
+	bool JustPressed;
+	bool IsEmpty;
+}
+
+event FireProjectile
+{
+	byte WeaponId;
+	EntityRef PlayerEntity;
+	FPVector3 TargetPosition;
+	FPVector3 HitNormal;
+}
+
+event WeaponSwitchStarted
+{
+	byte WeaponId;
+	EntityRef PlayerEntity;
+}
+
+event WeaponReloadStarted
+{
+	byte WeaponId;
+	EntityRef PlayerEntity;
+}
+
+synced event DamageInflicted
+{
+	local player_ref Player;
+	bool IsFatal;
+	bool IsCritical;
+}

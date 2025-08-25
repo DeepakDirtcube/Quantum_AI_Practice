@@ -1,0 +1,355 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a3678cb9335401a9d16c5b6ad6b54d0, type: 3}
+  m_Name: Deathmatch_GameplayData
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: Scenes/Deathmatch/Deathmatch_GameplayData
+    Guid:
+      Value: 479277327788499419
+  SpawnPoints:
+  - Position:
+      X:
+        RawValue: -221970
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 1224540
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -57368
+      Z:
+        RawValue: 0
+      W:
+        RawValue: -31682
+  - Position:
+      X:
+        RawValue: -1873477
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -1127415
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 3872
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 65421
+  - Position:
+      X:
+        RawValue: 1855127
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 248709
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -50824
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 41374
+  - Position:
+      X:
+        RawValue: -599654
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -1113456
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 43178
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 49300
+  - Position:
+      X:
+        RawValue: 1440022
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -692846
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -62664
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 19186
+  - Position:
+      X:
+        RawValue: -1097728
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 713031
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 60211
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 25875
+  - Position:
+      X:
+        RawValue: 1296695
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 1172766
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -49378
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 43089
+  - Position:
+      X:
+        RawValue: 1592918
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -1130692
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 13935
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 64037
+  - Position:
+      X:
+        RawValue: 728498
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 1252393
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -65534
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 385
+  - Position:
+      X:
+        RawValue: -723386
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 879755
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -65332
+      Z:
+        RawValue: 0
+      W:
+        RawValue: -5159
+  - Position:
+      X:
+        RawValue: -302252
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -148111
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 28313
+      Z:
+        RawValue: 0
+      W:
+        RawValue: -59104
+  - Position:
+      X:
+        RawValue: -1031536
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -568852
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -39546
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 52259
+  - Position:
+      X:
+        RawValue: -747634
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -675414
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 65536
+  - Position:
+      X:
+        RawValue: -112394
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 254410
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -65146
+      Z:
+        RawValue: 0
+      W:
+        RawValue: -7138
+  - Position:
+      X:
+        RawValue: 165281
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -755695
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -46201
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 46479
+  - Position:
+      X:
+        RawValue: -1645609
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 1109524
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -45832
+      Z:
+        RawValue: 0
+      W:
+        RawValue: -46843
+  - Position:
+      X:
+        RawValue: 554237
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 246743
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 37138
+      Z:
+        RawValue: 0
+      W:
+        RawValue: -53997
+  - Position:
+      X:
+        RawValue: -1166671
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 1031077
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 37670
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 53627
+  - Position:
+      X:
+        RawValue: 796393
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -625672
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: -3976
+      Z:
+        RawValue: 0
+      W:
+        RawValue: -65415
+  - Position:
+      X:
+        RawValue: 124125
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: -1244069
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 39661
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 52172
+  - Position:
+      X:
+        RawValue: -1855324
+      Y:
+        RawValue: 0
+      Z:
+        RawValue: 627310
+    Rotation:
+      X:
+        RawValue: 0
+      Y:
+        RawValue: 65145
+      Z:
+        RawValue: 0
+      W:
+        RawValue: 7143

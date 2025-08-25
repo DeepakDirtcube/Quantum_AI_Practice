@@ -1,0 +1,12 @@
+input
+{
+    FPVector2 MoveDirection;
+    FPVector2 LookRotationDelta;
+    byte      InterpolationOffset;
+    byte      InterpolationAlphaEncoded;
+    byte      Weapon;
+    button    Jump;
+    button    Fire;
+    button    Reload;
+    button    Spray;
+}

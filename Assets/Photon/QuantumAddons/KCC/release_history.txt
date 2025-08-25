@@ -1,0 +1,18 @@
+Photon Quantum KCC Addon - Release History
+
+Last tested with Quantum SDK 3.0.0 RC 1523
+
+Version 3.0.2
+- Improved penetration solver.
+- Range of CCD Radius Multiplier increased to 10-90%.
+- Ground snap processor now does all checks on separate KCCData instance to avoid side effects.
+- KCC.ResolvePenetration() now takes data from KCCData passed as argument and stores results there.
+- Added [Preserve] attribute to KCCSystem prevent stripping.
+
+Version 3.0.1
+- Improved multi-collider penetration correction.
+- Fixes for StepUpProcessor. Now it requires horizontal movement push-back to activate.
+- Fixed initialization of KCCData.LookYaw after spawning an entity based on its transform component.
+
+Version 3.0.0
+- Initial release.

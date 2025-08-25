@@ -1,0 +1,8 @@
+﻿component LagCompensationTarget
+{
+    AssetRef<EntityPrototype> ProxyPrototype;
+    [ExcludeFromPrototype]
+    array<Transform3D>[32] Buffer;
+    [ExcludeFromPrototype]
+    int BufferIndex;
+}

@@ -1,0 +1,48 @@
+singleton component Gameplay
+{
+    EGameplayState State;
+    FP             GameDuration;
+    FP             DoubleDamageDuration;
+    FP             PlayerRespawnTime;
+    FP             RemainingTime;
+
+    [AllocateOnComponentAdded, FreeOnComponentRemoved, ExcludeFromPrototype]
+    list<int> RecentSpawnPoints;
+
+    [AllocateOnComponentAdded, FreeOnComponentRemoved]
+    dictionary<PlayerRef, PlayerData> PlayerData;
+}
+
+enum EGameplayState
+{
+    Skirmish,
+    Running,
+    Finished,
+}
+
+struct PlayerData
+{
+    PlayerRef PlayerRef;
+    FP        RespawnTimer;
+    int       Kills;
+    int       Deaths;
+    int       LastKillFrame;
+    int       StatisticPosition;
+    bool      IsAlive;
+    bool      IsConnected;
+}
+
+signal PlayerKilled(PlayerRef killerPlayerRef, PlayerRef victimPlayerRef, Byte weaponType, Boolean isCriticalKill);
+
+synced event PlayerKilled
+{
+    PlayerRef KillerPlayerRef;
+    PlayerRef VictimPlayerRef;
+    Byte WeaponType;
+    Boolean IsCriticalKill;
+}
+
+synced event GameplayStateChanged
+{
+	EGameplayState State;
+}

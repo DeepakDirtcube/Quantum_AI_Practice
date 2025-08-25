@@ -1,0 +1,12 @@
+component KCCProcessorLink
+{
+    AssetRef<KCCProcessor> Processor;
+}
+
+enum EKCCProcessorSource : Byte
+{
+    None           = 0,
+    Modifier       = 1,
+    StaticCollider = 2,
+    EntityCollider = 3,
+}

@@ -1,0 +1,25 @@
+component Pickup
+{
+    PickupSettings Settings;
+    FP PickupCooldown;
+
+    [ExcludeFromPrototype]
+    FP Cooldown;
+}
+
+union PickupSettings
+{
+    HealthPickup Health;
+    WeaponPickup Weapon;
+}
+
+struct HealthPickup
+{
+    FP Heal;
+}
+
+struct WeaponPickup
+{
+    Byte WeaponID;
+    int RefillAmmo;
+}

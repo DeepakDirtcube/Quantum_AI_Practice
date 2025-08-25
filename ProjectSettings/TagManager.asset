@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
@@ -11,6 +12,9 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
+  - 
+  - FirstPersonView
   - 
   - 
   - 
@@ -18,25 +22,22 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Lag Compensation 01
+  - Lag Compensation 02
+  - Lag Compensation 03
+  - Lag Compensation 04
+  - Lag Compensation 05
+  - Lag Compensation 06
+  - Lag Compensation 07
+  - Lag Compensation 08
+  - Lag Compensation 09
+  - Lag Compensation 10
+  - Lag Compensation 11
+  - Lag Compensation 12
+  - Lag Compensation 13
+  - Lag Compensation 14
+  - Lag Compensation 15
+  - Lag Compensation 16
   m_SortingLayers:
   - name: Default
     uniqueID: 0

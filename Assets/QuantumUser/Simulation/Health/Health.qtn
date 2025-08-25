@@ -1,0 +1,17 @@
+component Health
+{
+	FP MaxHealth;
+	FP SpawnImmortalityTime;
+
+	[ExcludeFromPrototype]
+	FP CurrentHealth;
+	[ExcludeFromPrototype]
+	FP ImmortalityCooldown;
+}
+
+event DamageReceived
+{
+	EntityRef Entity;
+	FPVector3 HitPoint;
+	FPVector3 HitNormal;
+}

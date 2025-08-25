@@ -1,0 +1,15 @@
+component KCC
+{
+    AssetRef<KCCSettings> Settings;
+
+    [ExcludeFromPrototype]
+    Boolean IsInitialized;
+    [ExcludeFromPrototype]
+    KCCData Data;
+    [ExcludeFromPrototype]
+    hash_set<KCCIgnore> Ignores;
+    [ExcludeFromPrototype]
+    list<KCCModifier> Modifiers;
+    [ExcludeFromPrototype]
+    list<KCCCollision> Collisions;
+}
