@@ -56,6 +56,21 @@ namespace Quantum.Prototypes {
     public Quantum.Prototypes.PlayerDataPrototype Value;
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.BotTag))]
+  public unsafe partial class BotTagPrototype : ComponentPrototype<Quantum.BotTag> {
+    [HideInInspector()]
+    public Int32 _empty_prototype_dummy_field_;
+    partial void MaterializeUser(Frame frame, ref Quantum.BotTag result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.BotTag component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.BotTag result, in PrototypeMaterializationContext context = default) {
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.Gameplay))]
   public unsafe partial class GameplayPrototype : ComponentPrototype<Quantum.Gameplay> {
     public Quantum.QEnum32<EGameplayState> State;

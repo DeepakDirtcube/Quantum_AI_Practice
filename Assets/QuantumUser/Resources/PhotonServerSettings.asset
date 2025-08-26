@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime:
-    AppIdFusion:
-    AppIdQuantum:
-    AppIdChat:
-    AppIdVoice:
+    AppIdRealtime: 
+    AppIdFusion: 
+    AppIdQuantum: 8fbbcf76-42a8-434c-bc0e-8a1f6513c069
+    AppIdChat: 
+    AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -32,4 +32,5 @@ MonoBehaviour:
     ClientLogging: 2
   PlayerTtlInSeconds: 0
   EmptyRoomTtlInSeconds: 0
+  EnableCrc: 0
   BestRegionSummaryKey: Quantum.BestRegionSummary
