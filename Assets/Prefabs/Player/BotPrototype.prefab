@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 2276471923961203305}
   - component: {fileID: 5906280554485791126}
   - component: {fileID: 806172817832158344}
+  - component: {fileID: 6360011914493917380}
+  - component: {fileID: 2105433268917442736}
   m_Layer: 6
   m_Name: BotPrototype
   m_TagString: Untagged
@@ -540,6 +542,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prototype:
     _empty_prototype_dummy_field_: 0
+--- !u!114 &6360011914493917380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227131928142171230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3300df3925216f346828472def88c7f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prototype:
+    Data:
+      Root:
+        Id:
+          Value: 1142043511309730668
+      UsesStateHistory:
+        Value: 0
+    Config:
+      Id:
+        Value: 0
+--- !u!114 &2105433268917442736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227131928142171230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba67e4ce63d88948b50e26b718d43ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prototype:
+    Board:
+      Id:
+        Value: 420411004699090189
+    Entries: []
 --- !u!1 &302832983978334846
 GameObject:
   m_ObjectHideFlags: 0

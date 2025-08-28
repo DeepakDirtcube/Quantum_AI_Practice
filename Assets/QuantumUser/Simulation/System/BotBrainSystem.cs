@@ -50,6 +50,11 @@ namespace Quantum
             // IMPORTANT: give the bot a speed (humans get this in PlayerSystem)
             bot.KCC->SetKinematicSpeed(bot.Player->MoveSpeed); // mirrors PlayerSystem’s behavior
             bot.KCC->SetInputDirection(dir);
+
+            if (frame.Has<HFSMAgent>(bot.Entity) == true)
+            {
+                HFSMManager.Update(frame, frame.DeltaTime, bot.Entity);
+            }
         }
 
         public struct Filter

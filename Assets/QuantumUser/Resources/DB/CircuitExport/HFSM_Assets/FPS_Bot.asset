@@ -1,0 +1,193 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8987323177773951824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3054702403346d044834dc7d9d0d2ea5, type: 3}
+  m_Name: AcquireNearestPlayer_LW8knwyzxEe8txx
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/FPS_Bot|AcquireNearestPlayer_LW8knwyzxEe8txx
+    Guid:
+      Value: 3121866985653493661
+  Label: 
+  TargetEntityKey:
+    Key: TargetEntityKey
+  TargetPosKey:
+    Key: TargetPos
+--- !u!114 &-4254286361474275184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1943870150, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: State_NewState_keFcd8YOBEaTgou
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/FPS_Bot|State_NewState_keFcd8YOBEaTgou
+    Guid:
+      Value: 2716796868886006824
+  Label: Acquire
+  Index: 1
+  OnUpdateLinks:
+  - Id:
+      Value: 3121866985653493661
+  OnEnterLinks: []
+  OnExitLinks: []
+  Transitions:
+  - Id: 331d2446-4db4-4672-bbac-b1c2060be922
+    EventKey: 0
+    DecisionLink:
+      Id:
+        Value: 3823678358135353172
+    StateLink:
+      Id:
+        Value: 2674864526127863353
+    TransitionSetLink:
+      Id:
+        Value: 0
+  ChildrenLinks: []
+  ParentLink:
+    Id:
+      Value: 0
+  Level: 0
+--- !u!114 &-2895454171086847669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82d4f671b2230a840a608543f80a6f30, type: 3}
+  m_Name: BBEntityInvalid_lON1lKuSakyR8jQ
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/FPS_Bot|BBEntityInvalid_lON1lKuSakyR8jQ
+    Guid:
+      Value: 2798524229416641919
+  Label: 
+  EntityKey:
+    Key: TargetEntityKey
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1727795870, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: FPS_Bot
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/FPS_Bot
+    Guid:
+      Value: 1142043511309730668
+  Label: 
+  StatesLinks:
+  - Id:
+      Value: 2716796868886006824
+  - Id:
+      Value: 2674864526127863353
+  EventsNames: []
+--- !u!114 &3334025487209832508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6f51b989a3bc54e8b035389970bce7, type: 3}
+  m_Name: PlanChaseAndAim_Dv8GmCiAxk-pvN_
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/FPS_Bot|PlanChaseAndAim_Dv8GmCiAxk-pvN_
+    Guid:
+      Value: 2660605843867141771
+  Label: 
+  TargetEntityKey:
+    Key: TargetEntityKey
+  TargetPosKey:
+    Key: TargetPos
+  MoveDirKey:
+    Key: MoveDir
+  WantFireKey:
+    Key: WantFire
+  AttackRange:
+    RawValue: 655360
+  StopBand:
+    RawValue: 81920
+--- !u!114 &6726570544186493448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e2e75c7f7adfa4cbff2864830b1bc6, type: 3}
+  m_Name: BBEntityValid_Wn_MhfcaiEWqK7L
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/FPS_Bot|BBEntityValid_Wn_MhfcaiEWqK7L
+    Guid:
+      Value: 3823678358135353172
+  Label: 
+  EntityKey:
+    Key: TargetEntityKey
+--- !u!114 &9011848867208651028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1943870150, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: State_Combat_lFHAVFlqn0qTnPC
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/FPS_Bot|State_Combat_lFHAVFlqn0qTnPC
+    Guid:
+      Value: 2674864526127863353
+  Label: Combat
+  Index: 0
+  OnUpdateLinks:
+  - Id:
+      Value: 2660605843867141771
+  OnEnterLinks: []
+  OnExitLinks: []
+  Transitions:
+  - Id: d64817c5-b4f7-42ea-8627-b2239260ef37
+    EventKey: 0
+    DecisionLink:
+      Id:
+        Value: 2798524229416641919
+    StateLink:
+      Id:
+        Value: 2716796868886006824
+    TransitionSetLink:
+      Id:
+        Value: 0
+  ChildrenLinks: []
+  ParentLink:
+    Id:
+      Value: 0
+  Level: 0
