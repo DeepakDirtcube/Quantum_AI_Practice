@@ -1,5 +1,6 @@
 // Assets/QuantumUser/Simulation/System/BotBrainSystem.cs
 using Photon.Deterministic;
+using Quantum.BotSDK;
 using UnityEngine.Scripting;
 
 namespace Quantum
@@ -9,6 +10,7 @@ namespace Quantum
     [Preserve]
     public unsafe class BotBrainSystem : SystemMainThreadFilter<BotBrainSystem.Filter>
     {
+
         // BotBrainSystem.cs (replace Update with this version)
         public override void Update(Frame frame, ref Filter bot)
         {

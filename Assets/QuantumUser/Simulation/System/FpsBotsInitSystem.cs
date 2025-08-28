@@ -41,6 +41,7 @@ namespace Quantum
 
                 // Connect → Gameplay.ConnectPlayer() will spawn avatar via RespawnPlayer
                 gameplay->ConnectPlayer(frame, slot);
+                Log.Info($"[BotsInit] Connected bot PlayerRef={slot}");
             }
 
             // One-shot: after all connect attempts, stop running

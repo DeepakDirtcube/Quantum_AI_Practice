@@ -169,6 +169,22 @@ namespace Quantum
 			}
 			playerEntity = frame.Create(avatarRef);
 
+			bool hasBB = frame.Has<AIBlackboardComponent>(playerEntity);
+			bool hasHFSM = frame.Has<HFSMAgent>(playerEntity);
+			bool hasKCC = frame.Has<KCC>(playerEntity);
+			bool hasPly = frame.Has<Player>(playerEntity);
+			Log.Info($"[Respawn] {playerRef}: BotTag={frame.Has<BotTag>(playerEntity)} BB={hasBB} HFSM={hasHFSM} KCC={hasKCC} Player={hasPly}");
+
+
+			BotTag* botTag;
+			if (frame.Unsafe.TryGetPointer<BotTag>(playerEntity, out botTag))
+			{
+				if (frame.TryGet<HFSMAgent>(playerEntity, out var hfsmAgent))
+				{
+					Quantum.BotSDK.BotSDKDebuggerSystem.AddToDebugger(frame, playerEntity, hfsmAgent);
+				}
+			}
+
 			frame.AddOrGet<Player>(playerEntity, out var player);
 			player->PlayerRef = playerRef;
 

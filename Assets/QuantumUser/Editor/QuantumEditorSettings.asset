@@ -20,10 +20,64 @@ MonoBehaviour:
   QuantumToolbarZone: 0
   UsePhotonAppVersionsPostprocessor: 1
   EntityComponentInspectorMode: 2
-  FPDisplayPrecision: 5
   AutoBuildOnSceneSave: 96
   AutoBuildOnPlaymodeChanged: 96
   AutoBuildOnBuild: 96
-  AutoRunQtnCodeGen: 0
-  AssetGuidOverrides: []
-  QuantumSolutionPath: 
+  AssetGuidOverrides:
+  - Asset: {fileID: 11400000, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 1813622667946879561
+  - Asset: {fileID: -2021454074518029803, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 2639869596222827645
+  - Asset: {fileID: 11400000, guid: 6d311493d2df93448bc2b3e1b764d468, type: 2}
+    Guid:
+      Value: 140988476383972303
+  - Asset: {fileID: 8030422349423652321, guid: 6d311493d2df93448bc2b3e1b764d468, type: 2}
+    Guid:
+      Value: 4442038689292822426
+  - Asset: {fileID: -3693453270815873766, guid: 6d311493d2df93448bc2b3e1b764d468, type: 2}
+    Guid:
+      Value: 1608442757653929359
+  - Asset: {fileID: -2575970347774346827, guid: 6d311493d2df93448bc2b3e1b764d468, type: 2}
+    Guid:
+      Value: 3773237710578178204
+  - Asset: {fileID: 9133387332582849679, guid: 6d311493d2df93448bc2b3e1b764d468, type: 2}
+    Guid:
+      Value: 3137273031208264091
+  - Asset: {fileID: 8915722416137667304, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 865823349494860759
+  - Asset: {fileID: -1329597018399045661, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 1200100000540734552
+  - Asset: {fileID: 4087007133568150297, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 1681600055671822944
+  - Asset: {fileID: 5909756928492594083, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 3017194004501479608
+  - Asset: {fileID: -983007074486313867, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 1211229477614342572
+  - Asset: {fileID: -2891120521482484548, guid: e9b5d6eb9df89bc468e60c7f0374cc61, type: 2}
+    Guid:
+      Value: 687403000389107565
+  - Asset: {fileID: 0}
+    Guid:
+      Value: 4080214463156975068
+  - Asset: {fileID: 0}
+    Guid:
+      Value: 4318007921769206797
+  - Asset: {fileID: 0}
+    Guid:
+      Value: 4441305794088080734
+  - Asset: {fileID: 0}
+    Guid:
+      Value: 968409045698825287
+  - Asset: {fileID: -2743215417759656938, guid: 13e3958511dcec246b2610fc74e1e226, type: 2}
+    Guid:
+      Value: 1415204889457538502
+  - Asset: {fileID: -2219276834514029076, guid: 13e3958511dcec246b2610fc74e1e226, type: 2}
+    Guid:
+      Value: 968409045698825287
