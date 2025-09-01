@@ -72,24 +72,6 @@ MonoBehaviour:
     StartDisabled: 0
     Children: []
   - SystemType:
-      AssemblyQualifiedName: Quantum.InputContainerSystem, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.PlayerJoiningSystem, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.CharacterInputSystem, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
       AssemblyQualifiedName: Quantum.KCCSystem, Quantum.Simulation, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     SystemName: 
@@ -263,7 +245,6 @@ MonoBehaviour:
       Z:
         RawValue: 0
     SolverType: 1
-    UsePhysicsNativeLib: 1
     SolverIterations: 4
     PositionSolverIterations: 2
     UseJoints: 1
@@ -282,6 +263,7 @@ MonoBehaviour:
     SimplexMinBitShift: 0
     SimplexMaxBitShift: 2
     ShapeCastMaxIterations: 16
+    ShapeCastMinIterations: 4
     ShapeCastHardTolerance:
       RawValue: 655
     ShapeCastSoftTolerance:

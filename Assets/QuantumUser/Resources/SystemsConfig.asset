@@ -112,19 +112,13 @@ MonoBehaviour:
     StartDisabled: 0
     Children: []
   - SystemType:
-      AssemblyQualifiedName: Quantum.BotBrainSystem, Quantum.Simulation, Version=0.0.0.0,
+      AssemblyQualifiedName: Quantum.MinionSpawnSystem, Quantum.Simulation, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     SystemName: 
     StartDisabled: 0
     Children: []
   - SystemType:
-      AssemblyQualifiedName: Quantum.FpsBotsInitSystem, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    SystemName: 
-    StartDisabled: 0
-    Children: []
-  - SystemType:
-      AssemblyQualifiedName: Quantum.BotHFSMInputSystem, Quantum.Simulation, Version=0.0.0.0,
+      AssemblyQualifiedName: Quantum.MinionGoReturnSystem, Quantum.Simulation, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     SystemName: 
     StartDisabled: 0

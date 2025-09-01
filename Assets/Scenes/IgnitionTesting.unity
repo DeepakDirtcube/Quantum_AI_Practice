@@ -3261,7 +3261,7 @@ MonoBehaviour:
   AssetRef:
     Id:
       Value: 302234053534806196
-  BakeAllMode: 112
+  BakeAllMode: -1
   NavMeshSerializeType: 0
   StaticCollider2DReferences: []
   StaticCollider3DReferences:
@@ -3861,7 +3861,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 763282391}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &137105871
@@ -24039,6 +24040,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5763249122407307908, guid: 13fe14ba3763eed4f970fff6a9d2437c, type: 3}
   m_PrefabInstance: {fileID: 759259893}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &763282390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 763282391}
+  - component: {fileID: 763282392}
+  m_Layer: 0
+  m_Name: QuantumMapNavMeshUnity
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &763282391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763282390}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 134094455}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &763282392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763282390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9121d5c86efee4faaf33c31a8ff549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NavMeshSurfaces:
+  - {fileID: 1097968729}
+  Settings:
+    WeldIdenticalVertices: 1
+    WeldVertexEpsilon: 0.0001
+    DelaunayTriangulation: 0
+    DelaunayTriangulationRestrictToPlanes: 0
+    FixTrianglesOnEdges: 1
+    FixTrianglesOnEdgesEpsilon: 0.000001
+    FixTrianglesOnEdgesHeightEpsilon: 0.05
+    LinkErrorCorrection: 0
+    ClosestTriangleCalculation: 2
+    ClosestTriangleCalculationDepth: 3
+    EnableQuantum_XY: 0
+    MinAgentRadius:
+      RawValue: 16384
+    ImportRegionMode: 2
+    RegionDetectionMargin: 0.4
+    RegionAreaIds: 
 --- !u!1001 &763404154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30321,6 +30385,31 @@ MonoBehaviour:
     SystemsConfig:
       Id:
         Value: 4449922722040316809
+    MinionWave:
+      Count: 5
+      SpawnPos:
+        X:
+          RawValue: 0
+        Y:
+          RawValue: 0
+        Z:
+          RawValue: 0
+      TargetPos:
+        X:
+          RawValue: 786432
+        Y:
+          RawValue: 0
+        Z:
+          RawValue: 0
+      NavmeshName: Navmesh
+      AgentConfig:
+        Id:
+          Value: 1187386615929290082
+      DefaultStoppingDistance:
+        RawValue: 32768
+    MinionView:
+      Id:
+        Value: 1170961495524715949
     CollectorsSampleConfig:
       PlayerCollectorPrototype:
         Id:
@@ -33383,6 +33472,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a7a5cff079135246888e681ee7e0a0a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1097968728}
+    - targetCorrespondingSourceObject: {fileID: -854453576789456866, guid: 2a7a5cff079135246888e681ee7e0a0a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1097968730}
   m_SourcePrefab: {fileID: 100100000, guid: 2a7a5cff079135246888e681ee7e0a0a, type: 3}
 --- !u!4 &1097968726 stripped
 Transform:
@@ -33416,6 +33508,42 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5652619786740535042, guid: f3aeec13bf0a034478e22ebbc2327cd5, type: 3}
+--- !u!1 &1097968729 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -854453576789456866, guid: 2a7a5cff079135246888e681ee7e0a0a, type: 3}
+  m_PrefabInstance: {fileID: 1097968725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1097968730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097968729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 0}
+  m_BuildHeightMesh: 0
 --- !u!1001 &1100023584
 PrefabInstance:
   m_ObjectHideFlags: 0
