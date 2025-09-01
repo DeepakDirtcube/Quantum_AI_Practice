@@ -159,31 +159,8 @@ namespace Quantum
 			playerData.IsAlive = true;
 			players[playerRef] = playerData;
 
-			// var runtimePlayer = frame.GetPlayerData(playerRef);
+			var runtimePlayer = frame.GetPlayerData(playerRef);
 			// playerEntity = frame.Create(runtimePlayer.PlayerAvatar);
-			var avatarRef = GetAvatarFor(frame, playerRef);     // override-first
-			if (avatarRef.IsValid == false)
-			{
-				Log.Error($"RespawnPlayer: No avatar configured for {playerRef}. (RuntimeConfig override missing and runner slot has no avatar)");
-				return;                                           // avoid NRE
-			}
-			playerEntity = frame.Create(avatarRef);
-
-			bool hasBB = frame.Has<AIBlackboardComponent>(playerEntity);
-			bool hasHFSM = frame.Has<HFSMAgent>(playerEntity);
-			bool hasKCC = frame.Has<KCC>(playerEntity);
-			bool hasPly = frame.Has<Player>(playerEntity);
-			Log.Info($"[Respawn] {playerRef}: BotTag={frame.Has<BotTag>(playerEntity)} BB={hasBB} HFSM={hasHFSM} KCC={hasKCC} Player={hasPly}");
-
-
-			BotTag* botTag;
-			if (frame.Unsafe.TryGetPointer<BotTag>(playerEntity, out botTag))
-			{
-				if (frame.TryGet<HFSMAgent>(playerEntity, out var hfsmAgent))
-				{
-					Quantum.BotSDK.BotSDKDebuggerSystem.AddToDebugger(frame, playerEntity, hfsmAgent);
-				}
-			}
 
 			frame.AddOrGet<Player>(playerEntity, out var player);
 			player->PlayerRef = playerRef;
@@ -231,25 +208,25 @@ namespace Quantum
 		}
 
 		// inside partial struct Gameplay
-		private AssetRef<EntityPrototype> GetAvatarFor(Frame frame, PlayerRef playerRef)
-		{
-			// 1) Try override from RuntimeConfig by slot (PlayerRef is 1-based)
-			var cfg = frame.RuntimeConfig.CollectorsSampleConfig;
-			if (cfg.Bots != null)
-			{
-				int index = (int)playerRef - 1;
-				if (index >= 0 && index < cfg.Bots.Length)
-				{
-					var overrideRef = cfg.Bots[index];              // AssetRef<EntityPrototype>
-					if (overrideRef.IsValid)
-						return overrideRef;                           // use bot prefab from RuntimeConfig
-				}
-			}
+		// private AssetRef<EntityPrototype> GetAvatarFor(Frame frame, PlayerRef playerRef)
+		// {
+		// 	// 1) Try override from RuntimeConfig by slot (PlayerRef is 1-based)
+		// 	var cfg = frame.RuntimeConfig.CollectorsSampleConfig;
+		// 	if (cfg.Bots != null)
+		// 	{
+		// 		int index = (int)playerRef - 1;
+		// 		if (index >= 0 && index < cfg.Bots.Length)
+		// 		{
+		// 			var overrideRef = cfg.Bots[index];              // AssetRef<EntityPrototype>
+		// 			if (overrideRef.IsValid)
+		// 				return overrideRef;                           // use bot prefab from RuntimeConfig
+		// 		}
+		// 	}
 
-			// 2) Fallback to runner-configured avatar (human/default)
-			var rp = frame.GetPlayerData(playerRef);
-			return rp.PlayerAvatar;                             // AssetRef<EntityPrototype>
-		}
+		// 	// 2) Fallback to runner-configured avatar (human/default)
+		// 	var rp = frame.GetPlayerData(playerRef);
+		// 	return rp.PlayerAvatar;                             // AssetRef<EntityPrototype>
+		// }
 
 	}
 }
