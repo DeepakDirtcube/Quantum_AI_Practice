@@ -72,8 +72,8 @@ MonoBehaviour:
     StartDisabled: 0
     Children: []
   - SystemType:
-      AssemblyQualifiedName: Quantum.MinionSpawnSystem, Quantum.Simulation, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      AssemblyQualifiedName: Quantum.MinionWaveSpawnerSystem, Quantum.Simulation,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     SystemName: 
     StartDisabled: 0
     Children: []

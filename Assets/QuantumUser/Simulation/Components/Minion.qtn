@@ -12,4 +12,11 @@ component Minion {
   MinionState State;
   FP StoppingDistance;
   FP WaitTimer;
+  FP LifeAfterReturnSeconds; 
+}
+
+component MinionWaveSpawner {
+  int CurrentWave;
+  FP Timer;
+  list<EntityRef> SpawnedMinions;
 }

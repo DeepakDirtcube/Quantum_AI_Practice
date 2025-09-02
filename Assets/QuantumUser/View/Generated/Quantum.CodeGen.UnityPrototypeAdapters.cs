@@ -101,6 +101,22 @@ namespace Quantum.Prototypes.Unity {
       return result;
     }
   }
+  [System.SerializableAttribute()]
+  public unsafe partial class MinionWaveSpawnerPrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.MinionWaveSpawnerPrototype> {
+    public Int32 CurrentWave;
+    public FP Timer;
+    [DynamicCollectionAttribute()]
+    public Quantum.QuantumEntityPrototype[] SpawnedMinions = {};
+    partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.MinionWaveSpawnerPrototype prototype);
+    public override Quantum.Prototypes.MinionWaveSpawnerPrototype Convert(Quantum.QuantumEntityPrototypeConverter converter) {
+      var result = new Quantum.Prototypes.MinionWaveSpawnerPrototype();
+      converter.Convert(this.CurrentWave, out result.CurrentWave);
+      converter.Convert(this.Timer, out result.Timer);
+      converter.Convert(this.SpawnedMinions, out result.SpawnedMinions);
+      ConvertUser(converter, ref result);
+      return result;
+    }
+  }
 }
 #pragma warning restore 0109
 #pragma warning restore 1591

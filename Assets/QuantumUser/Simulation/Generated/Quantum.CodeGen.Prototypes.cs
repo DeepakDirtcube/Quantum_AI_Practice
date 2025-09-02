@@ -326,6 +326,7 @@ namespace Quantum.Prototypes {
     public Quantum.QEnum32<MinionState> State;
     public FP StoppingDistance;
     public FP WaitTimer;
+    public FP LifeAfterReturnSeconds;
     partial void MaterializeUser(Frame frame, ref Quantum.Minion result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.Minion component = default;
@@ -338,7 +339,35 @@ namespace Quantum.Prototypes {
         result.State = this.State;
         result.StoppingDistance = this.StoppingDistance;
         result.WaitTimer = this.WaitTimer;
+        result.LifeAfterReturnSeconds = this.LifeAfterReturnSeconds;
         MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.MinionWaveSpawner))]
+  public unsafe class MinionWaveSpawnerPrototype : ComponentPrototype<Quantum.MinionWaveSpawner> {
+    public Int32 CurrentWave;
+    public FP Timer;
+    [DynamicCollectionAttribute()]
+    public MapEntityId[] SpawnedMinions = {};
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.MinionWaveSpawner component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.MinionWaveSpawner result, in PrototypeMaterializationContext context = default) {
+        result.CurrentWave = this.CurrentWave;
+        result.Timer = this.Timer;
+        if (this.SpawnedMinions.Length == 0) {
+          result.SpawnedMinions = default;
+        } else {
+          var list = frame.AllocateList(out result.SpawnedMinions, this.SpawnedMinions.Length);
+          for (int i = 0; i < this.SpawnedMinions.Length; ++i) {
+            EntityRef tmp = default;
+            PrototypeValidator.FindMapEntity(this.SpawnedMinions[i], in context, out tmp);
+            list.Add(tmp);
+          }
+        }
     }
   }
   [System.SerializableAttribute()]

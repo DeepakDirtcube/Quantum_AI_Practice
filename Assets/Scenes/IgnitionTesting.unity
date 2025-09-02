@@ -30424,13 +30424,20 @@ MonoBehaviour:
       AgentConfig:
         Id:
           Value: 1187386615929290082
+      View:
+        Id:
+          Value: 1170961495524715949
       DefaultStoppingDistance:
         RawValue: 32768
       WaitAtEndpointsSeconds:
         RawValue: 0
-    MinionView:
-      Id:
-        Value: 1170961495524715949
+      InitialDelaySeconds:
+        RawValue: 65536
+      WaveIntervalSeconds:
+        RawValue: 524288
+      DefaultLifeAfterReturnSeconds:
+        RawValue: 327680
+      MaxWaves: 0
     CollectorsSampleConfig:
       PlayerCollectorPrototype:
         Id:
