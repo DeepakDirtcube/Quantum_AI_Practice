@@ -3863,6 +3863,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 763282391}
+  - {fileID: 1305888011}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &137105871
@@ -24575,6 +24576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 779271458}
   - component: {fileID: 779271457}
+  - component: {fileID: 779271459}
   m_Layer: 0
   m_Name: QuantumEntityViewUpdater
   m_TagString: Untagged
@@ -24617,6 +24619,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &779271459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 779271456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ccd22d720bef504696770c601e03525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hidePooledObjectsInHierarchy: 0
+  _resetGameObjectScale: 0
+  _precacheObjects:
+  - Count: 10
+    GameObject: {fileID: 4602811777696315450, guid: 4f83e7a17efd42e43ad011cf743e5e9f, type: 3}
 --- !u!1 &780359228
 GameObject:
   m_ObjectHideFlags: 0
@@ -30386,12 +30405,12 @@ MonoBehaviour:
       Id:
         Value: 4449922722040316809
     MinionWave:
-      Count: 10
+      Count: 5
       SpawnPos:
         X:
           RawValue: 0
         Y:
-          RawValue: 0
+          RawValue: 65536
         Z:
           RawValue: 0
       TargetPos:
@@ -30400,7 +30419,7 @@ MonoBehaviour:
         Y:
           RawValue: 0
         Z:
-          RawValue: 0
+          RawValue: 327680
       NavmeshName: QuantumMapNavMeshUnity
       AgentConfig:
         Id:
@@ -39422,12 +39441,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305888009}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 134094455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1308067795
 PrefabInstance:
@@ -62598,7 +62617,6 @@ SceneRoots:
   - {fileID: 972130063}
   - {fileID: 134094455}
   - {fileID: 1549367738}
-  - {fileID: 1305888011}
   - {fileID: 848454666}
   - {fileID: 100448374}
   - {fileID: 1516916144}
