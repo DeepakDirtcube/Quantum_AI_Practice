@@ -30386,7 +30386,7 @@ MonoBehaviour:
       Id:
         Value: 4449922722040316809
     MinionWave:
-      Count: 5
+      Count: 10
       SpawnPos:
         X:
           RawValue: 0
@@ -30401,12 +30401,14 @@ MonoBehaviour:
           RawValue: 0
         Z:
           RawValue: 0
-      NavmeshName: Navmesh
+      NavmeshName: QuantumMapNavMeshUnity
       AgentConfig:
         Id:
           Value: 1187386615929290082
       DefaultStoppingDistance:
         RawValue: 32768
+      WaitAtEndpointsSeconds:
+        RawValue: 0
     MinionView:
       Id:
         Value: 1170961495524715949
@@ -33542,7 +33544,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: bec740f86c8008147a5f7c39ec6742c0, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1001 &1100023584
 PrefabInstance:

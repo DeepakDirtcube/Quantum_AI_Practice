@@ -319,6 +319,29 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.Minion))]
+  public unsafe partial class MinionPrototype : ComponentPrototype<Quantum.Minion> {
+    public FPVector3 SpawnPos;
+    public FPVector3 TargetPos;
+    public Quantum.QEnum32<MinionState> State;
+    public FP StoppingDistance;
+    public FP WaitTimer;
+    partial void MaterializeUser(Frame frame, ref Quantum.Minion result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.Minion component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.Minion result, in PrototypeMaterializationContext context = default) {
+        result.SpawnPos = this.SpawnPos;
+        result.TargetPos = this.TargetPos;
+        result.State = this.State;
+        result.StoppingDistance = this.StoppingDistance;
+        result.WaitTimer = this.WaitTimer;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.Pickup))]
   public unsafe partial class PickupPrototype : ComponentPrototype<Quantum.Pickup> {
     public Quantum.Prototypes.PickupSettingsPrototype Settings;

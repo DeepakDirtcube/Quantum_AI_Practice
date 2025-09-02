@@ -1,0 +1,15 @@
+enum MinionState  
+{
+ GoingToTarget = 0,
+  WaitingAtTarget = 1,
+  ReturningToSpawn = 2,
+  WaitingAtSpawn = 3
+}
+
+component Minion {
+  FPVector3 SpawnPos;
+  FPVector3 TargetPos;
+  MinionState State;
+  FP StoppingDistance;
+  FP WaitTimer;
+}

@@ -13,6 +13,7 @@ namespace Quantum
     {
         public override void OnInit(Frame frame)
         {
+            Log.Info("MinionSpawnSystem.OnInit");
             // Read inline (Option A) wave config from RuntimeConfig
             var cfg = frame.RuntimeConfig.MinionWave;
             if (cfg == null || cfg.Count <= 0)
@@ -46,7 +47,7 @@ namespace Quantum
                 // Transform
                 frame.Set(e, new Transform3D
                 {
-                    Position = cfg.SpawnPos + new FPVector3(xOff, 0, zOff),
+                    Position = cfg.SpawnPos + new FPVector3(xOff, 1, zOff),
                     Rotation = FPQuaternion.Identity
                 });
 
@@ -68,21 +69,21 @@ namespace Quantum
                     });
                 }
 
-                // Create Pathfinder + Steering
-                var pf = NavMeshPathfinder.Create(frame, e, null);
+                // // Create Pathfinder + Steering
+                // var pf = NavMeshPathfinder.Create(frame, e, null);
 
-                // Apply NavMeshAgentConfig via SetConfig (AssetRef<NavMeshAgentConfig>)
-                if (cfg.AgentConfig.Id.IsValid)
-                {
-                    pf.SetConfig(frame, e, cfg.AgentConfig);
-                }
+                // // Apply NavMeshAgentConfig via SetConfig (AssetRef<NavMeshAgentConfig>)
+                // if (cfg.AgentConfig.Id.IsValid)
+                // {
+                //     pf.SetConfig(frame, e, cfg.AgentConfig);
+                // }
 
-                // First leg: go to target
-                pf.SetTarget(frame, cfg.TargetPos, navmesh);
+                // // First leg: go to target
+                // pf.SetTarget(frame, cfg.TargetPos, navmesh);
 
-                // Commit components
-                frame.Set(e, pf);
-                frame.Set(e, new NavMeshSteeringAgent());
+                // // Commit components
+                // frame.Set(e, pf);
+                // frame.Set(e, new NavMeshSteeringAgent());
             }
         }
 

@@ -72,7 +72,7 @@ MonoBehaviour:
     StartDisabled: 0
     Children: []
   - SystemType:
-      AssemblyQualifiedName: Quantum.KCCSystem, Quantum.Simulation, Version=0.0.0.0,
+      AssemblyQualifiedName: Quantum.MinionSpawnSystem, Quantum.Simulation, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
     SystemName: 
     StartDisabled: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   DefaultWaypointDetectionDistance:
     RawValue: 655
   MovementType: 1
-  VerticalPositioning: 1
+  VerticalPositioning: 0
   Speed:
     RawValue: 229376
   AngularSpeed:
