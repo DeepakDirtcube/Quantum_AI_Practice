@@ -50,44 +50,67 @@ namespace Quantum
             CheckDespawn(frame);
         }
 
+        /// <summary>
+        /// CHANGED: Now uses Entity Prototype instead of manual entity creation
+        /// </summary>
         private void SpawnWave(Frame frame, MinionWaveConfig cfg, int waveIndex)
         {
+            // ✅ NEW: Validate that we have a prototype reference
+            if (!cfg.MinionPrototype.Id.IsValid)
+            {
+                Log.Error("MinionWaveConfig.MinionPrototype is not set! Please assign a QuantumEntityPrototype asset.");
+                return;
+            }
+
+            // // ✅ NEW: Get the Entity Prototype asset
+            // var prototypeAsset = frame.FindAsset<EntityPrototype>(cfg.MinionPrototype);
+            // if (prototypeAsset == null)
+            // {
+            //     Log.Error($"Could not find Entity Prototype asset with ID: {cfg.MinionPrototype.Id}");
+            //     return;
+            // }
+
             for (int i = 0; i < cfg.Count; i++)
             {
-                var e = frame.Create();
-
+                // ✅ NEW: Spawn from prototype instead of manual creation
                 var spawnOffset = new FPVector3((i % 4) * FP._1, 0, (i / 4) * FP._1);
                 var position = cfg.SpawnPos + spawnOffset;
+                var rotation = FPQuaternion.Identity;
 
-                frame.Set(e, new Transform3D
-                {
-                    Position = position,
-                    Rotation = FPQuaternion.Identity
-                });
 
-                frame.Set(e, new Minion
-                {
-                    SpawnPos = cfg.SpawnPos,
-                    TargetPos = cfg.TargetPos,
-                    State = MinionState.GoingToTarget,
-                    StoppingDistance = cfg.DefaultStoppingDistance,
-                    WaitTimer = FP._0,
-                    LifeAfterReturnSeconds = cfg.DefaultLifeAfterReturnSeconds
-                });
+                // This creates the entity with ALL components from the prototype
+                var entity = frame.Create(cfg.MinionPrototype);
 
-                if (cfg.View.Id.IsValid)
+                // ✅ NEW: Override/customize specific component values after spawning
+                if (frame.Has<Minion>(entity))
                 {
-                    var view = frame.FindAsset<EntityView>(cfg.View);
-                    if (view != null)
-                    {
-                        frame.Set(e, View.Create(view));
-                    }
+                    var minion = frame.Unsafe.GetPointer<Minion>(entity);
+                    minion->SpawnPos = cfg.SpawnPos;
+                    minion->TargetPos = cfg.TargetPos;
+                    minion->State = MinionState.GoingToTarget;
+                    minion->StoppingDistance = cfg.DefaultStoppingDistance;
+                    minion->WaitTimer = FP._0;
+                    minion->LifeAfterReturnSeconds = cfg.DefaultLifeAfterReturnSeconds;
                 }
 
-                _spawnedMinions.Add((e, FP._0));
-            }
-        }
+                // ✅ NEW: Override transform position if needed (prototype might have different position)
+                if (frame.Has<Transform3D>(entity))
+                {
+                    var transform = frame.Unsafe.GetPointer<Transform3D>(entity);
+                    transform->Position = position;
+                    transform->Rotation = rotation;
+                }
 
+                // ✅ The View component is already set from the prototype!
+                // No need to manually set it - the prototype handles this
+
+                _spawnedMinions.Add((entity, FP._0));
+
+                Log.Debug($"Spawned minion {entity} at wave {waveIndex}, position {i}");
+            }
+
+            Log.Info($"Wave {waveIndex} spawned: {cfg.Count} minions");
+        }
         private void CheckDespawn(Frame frame)
         {
             for (int i = _spawnedMinions.Count - 1; i >= 0; i--)

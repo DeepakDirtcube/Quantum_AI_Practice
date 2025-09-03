@@ -30405,7 +30405,7 @@ MonoBehaviour:
       Id:
         Value: 4449922722040316809
     MinionWave:
-      Count: 1
+      Count: 3
       SpawnPos:
         X:
           RawValue: 0
@@ -30424,9 +30424,9 @@ MonoBehaviour:
       AgentConfig:
         Id:
           Value: 1187386615929290082
-      View:
+      MinionPrototype:
         Id:
-          Value: 1170961495524715949
+          Value: 1305725011185944771
       DefaultStoppingDistance:
         RawValue: 32768
       WaitAtEndpointsSeconds:

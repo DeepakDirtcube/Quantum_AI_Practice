@@ -14,7 +14,8 @@ namespace Quantum
         public FPVector3 TargetPos = new FPVector3(12, 5, 0);
         public string NavmeshName = "Navmesh";
         public AssetRef<NavMeshAgentConfig> AgentConfig;
-        public AssetRef<EntityView> View;
+        // public AssetRef<EntityView> View;
+        public AssetRef<EntityPrototype> MinionPrototype;
         public FP DefaultStoppingDistance = FP._1 / 2;
         public FP WaitAtEndpointsSeconds = FP._0;
 
