@@ -30405,7 +30405,7 @@ MonoBehaviour:
       Id:
         Value: 4449922722040316809
     MinionWave:
-      Count: 5
+      Count: 1
       SpawnPos:
         X:
           RawValue: 0
