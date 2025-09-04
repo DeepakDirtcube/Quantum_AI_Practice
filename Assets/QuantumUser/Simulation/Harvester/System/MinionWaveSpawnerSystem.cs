@@ -1,7 +1,9 @@
 namespace Quantum
 {
     using Photon.Deterministic;
+    using Quantum.BotSDK;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     public unsafe class MinionWaveSpawnerSystem : SystemMainThreadFilter<MinionWaveSpawnerSystem.Filter>
     {
@@ -24,6 +26,7 @@ namespace Quantum
                 CurrentWave = 0,
                 Timer = -cfg.InitialDelaySeconds
             });
+            HarvesterHelper.SetupAsBot(frame, e);
         }
 
         public override void Update(Frame frame, ref Filter filter)
@@ -32,13 +35,13 @@ namespace Quantum
             if (cfg == null) return;
 
             var spawner = filter.Spawner;
-
             spawner->Timer += frame.DeltaTime;
 
             if (spawner->Timer >= cfg.WaveIntervalSeconds)
             {
                 SpawnWave(frame, cfg, spawner->CurrentWave);
-                spawner->CurrentWave++;
+
+                spawner->CurrentWave += 1;
                 spawner->Timer = FP._0;
 
                 if (cfg.MaxWaves > 0 && spawner->CurrentWave >= cfg.MaxWaves)
@@ -47,8 +50,27 @@ namespace Quantum
                 }
             }
 
+            // ✅ Tick HFSM for all spawned minions
+            for (int i = _spawnedMinions.Count - 1; i >= 0; i--)
+            {
+                var (entity, _) = _spawnedMinions[i];
+
+                if (!frame.Exists(entity))
+                {
+                    _spawnedMinions.RemoveAt(i);
+                    continue;
+                }
+
+                if (frame.Has<HFSMAgent>(entity))
+                {
+                    HFSMManager.Update(frame, frame.DeltaTime, entity);
+                }
+            }
+
+            // ✅ Optional: check despawn
             CheckDespawn(frame);
         }
+
 
         /// <summary>
         /// CHANGED: Now uses Entity Prototype instead of manual entity creation
@@ -80,6 +102,23 @@ namespace Quantum
 
                 // This creates the entity with ALL components from the prototype
                 var entity = frame.Create(cfg.MinionPrototype);
+                if (frame.TryGet<HFSMAgent>(entity, out var hfsmAgent) == true)
+                {
+                    BotSDKDebuggerSystem.AddToDebugger(frame, entity, hfsmAgent);
+
+                }
+                if (frame.Has<AIBlackboardComponent>(entity))
+                {
+                    var blackboardAsset = frame.Unsafe.GetPointer<AIBlackboardComponent>(entity);
+                    if (blackboardAsset != null)
+                    {
+                        // SetBlackboardValues(frame, entity, blackboardAsset);
+                        Log.Info("22222222222222___");
+
+                        blackboardAsset->Set(frame, "MoveToTarget", cfg.TargetPos);
+                        // blackboardAsset.
+                    }
+                }
 
                 // ✅ NEW: Override/customize specific component values after spawning
                 if (frame.Has<Minion>(entity))
@@ -101,16 +140,40 @@ namespace Quantum
                     transform->Rotation = rotation;
                 }
 
+
                 // ✅ The View component is already set from the prototype!
                 // No need to manually set it - the prototype handles this
 
                 _spawnedMinions.Add((entity, FP._0));
 
-                Log.Debug($"Spawned minion {entity} at wave {waveIndex}, position {i}");
+                // Log.Debug($"Spawned minion {entity} at wave {waveIndex}, position {i}");
             }
 
             Log.Info($"Wave {waveIndex} spawned: {cfg.Count} minions");
         }
+
+
+
+        // /// <summary>
+        // /// ✅ FIX: Initialize blackboard if it's not properly set up
+        // /// </summary>
+        // private void InitializeBlackboardIfNeeded(Frame frame, AIBlackboardComponent* blackboard)
+        // {
+        //     try
+        //     {
+        //         // Try to check if the blackboard is initialized by attempting a safe operation
+        //         blackboard->Has(frame, "TestKey");
+        //     }
+        //     catch (System.Exception)
+        //     {
+        //         // If it throws an exception, the blackboard needs initialization
+        //         Log.Debug("Initializing AIBlackboardComponent");
+
+        //         // Force initialize the internal collections
+        //         // This is typically done automatically but may need manual trigger
+        //         blackboard->Initialize(frame);
+        //     }
+        // }
         private void CheckDespawn(Frame frame)
         {
             for (int i = _spawnedMinions.Count - 1; i >= 0; i--)

@@ -72,6 +72,24 @@ MonoBehaviour:
     StartDisabled: 0
     Children: []
   - SystemType:
+      AssemblyQualifiedName: Quantum.BotSDK.BotSDKDebuggerSystem, Quantum.Simulation,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.BotSDK.BotSDKSystem, Quantum.Simulation, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
+      AssemblyQualifiedName: Quantum.BotSDK.BotSDKTimerSystem, Quantum.Simulation,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    SystemName: 
+    StartDisabled: 0
+    Children: []
+  - SystemType:
       AssemblyQualifiedName: Quantum.MinionWaveSpawnerSystem, Quantum.Simulation,
         Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     SystemName: 

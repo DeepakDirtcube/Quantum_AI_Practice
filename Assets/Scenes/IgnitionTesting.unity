@@ -30388,7 +30388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeltaTimeType: 1
-  RecordingFlags: 0
+  RecordingFlags: -1
   InstantReplayConfig:
     SnapshotsPerSecond: 1
     LengthSeconds:
@@ -30415,11 +30415,11 @@ MonoBehaviour:
           RawValue: 0
       TargetPos:
         X:
-          RawValue: 786432
+          RawValue: 1734083
         Y:
           RawValue: 0
         Z:
-          RawValue: 327680
+          RawValue: 0
       NavmeshName: QuantumMapNavMeshUnity
       AgentConfig:
         Id:
@@ -30434,9 +30434,9 @@ MonoBehaviour:
       InitialDelaySeconds:
         RawValue: 65536
       WaveIntervalSeconds:
-        RawValue: 524288
+        RawValue: 983040
       DefaultLifeAfterReturnSeconds:
-        RawValue: 327680
+        RawValue: 983040
       MaxWaves: 0
     CollectorsSampleConfig:
       PlayerCollectorPrototype:

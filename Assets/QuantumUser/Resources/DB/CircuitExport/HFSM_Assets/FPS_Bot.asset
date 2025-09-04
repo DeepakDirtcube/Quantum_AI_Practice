@@ -38,10 +38,8 @@ MonoBehaviour:
     Guid:
       Value: 2716796868886006824
   Label: Acquire
-  Index: 1
-  OnUpdateLinks:
-  - Id:
-      Value: 3121866985653493661
+  Index: 0
+  OnUpdateLinks: []
   OnEnterLinks: []
   OnExitLinks: []
   Transitions:
@@ -49,7 +47,7 @@ MonoBehaviour:
     EventKey: 0
     DecisionLink:
       Id:
-        Value: 3823678358135353172
+        Value: 0
     StateLink:
       Id:
         Value: 2674864526127863353
@@ -168,24 +166,11 @@ MonoBehaviour:
     Guid:
       Value: 2674864526127863353
   Label: Combat
-  Index: 0
-  OnUpdateLinks:
-  - Id:
-      Value: 2660605843867141771
+  Index: 1
+  OnUpdateLinks: []
   OnEnterLinks: []
   OnExitLinks: []
-  Transitions:
-  - Id: d64817c5-b4f7-42ea-8627-b2239260ef37
-    EventKey: 0
-    DecisionLink:
-      Id:
-        Value: 2798524229416641919
-    StateLink:
-      Id:
-        Value: 2716796868886006824
-    TransitionSetLink:
-      Id:
-        Value: 0
+  Transitions: []
   ChildrenLinks: []
   ParentLink:
     Id:
