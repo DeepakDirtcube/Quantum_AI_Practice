@@ -17,9 +17,15 @@ MonoBehaviour:
     Guid:
       Value: 293080830556742839
   Entries:
+  - Type: 0
+    Key:
+      Key: HarvestEnabled
+  - Type: 3
+    Key:
+      Key: HarvestRate
   - Type: 5
     Key:
-      Key: MoveToTarget
+      Key: Destination
   InitializerRef:
     Id:
       Value: 514408577895716001

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -6922416760789670648}
   - component: {fileID: 7457894816979412148}
   - component: {fileID: 4922824393737427055}
+  - component: {fileID: 6121465998248416902}
   m_Layer: 0
   m_Name: MinionViewPrefab
   m_TagString: Untagged
@@ -444,3 +445,22 @@ MonoBehaviour:
       Id:
         Value: 293080830556742839
     Entries: []
+--- !u!114 &6121465998248416902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4602811777696315450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a2d18c710272a4c81eb113ab3ce069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prototype:
+    CurrentEnergy:
+      RawValue: 0
+    HarvestRate:
+      RawValue: 0
+    MaxEnergy:
+      RawValue: 0

@@ -5,7 +5,7 @@ namespace Quantum
     [System.Serializable]
     public unsafe class SetDestinationAction : AIAction
     {
-        public string DestinationKey = "MoveToTarget"; // Use string directly
+        // public string DestinationKey = "Destination"; // Use string directly
 
         public override void Execute(Frame frame, EntityRef entity, ref AIContext aiContext)
         {
@@ -18,8 +18,7 @@ namespace Quantum
             }
 
             // ✅ Get the target position from the blackboard using string key
-            Log.Info("1111111111111111___");
-            FPVector3 targetPosition = blackboard->GetVector3(frame, "MoveToTarget");
+            FPVector3 targetPosition = blackboard->GetVector3(frame, "Destination");
             // ✅ Get the NavMeshPathfinder component
             var pathfinder = frame.Unsafe.GetPointer<NavMeshPathfinder>(entity);
             if (pathfinder == null)

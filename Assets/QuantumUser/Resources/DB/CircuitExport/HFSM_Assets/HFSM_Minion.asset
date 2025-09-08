@@ -16,12 +16,14 @@ MonoBehaviour:
     Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|State_State2_T877gYy5Sk-726p
     Guid:
       Value: 611991089217075370
-  Label: State2
-  Index: 1
-  OnUpdateLinks: []
+  Label: HarvestingState
+  Index: 3
+  OnUpdateLinks:
+  - Id:
+      Value: 3510909483278608217
   OnEnterLinks:
   - Id:
-      Value: 888455955239420323
+      Value: 2924835544396685561
   OnExitLinks: []
   Transitions: []
   ChildrenLinks: []
@@ -46,11 +48,11 @@ MonoBehaviour:
     Guid:
       Value: 3332297623119400489
   Label: Idle
-  Index: 0
-  OnUpdateLinks:
+  Index: 2
+  OnUpdateLinks: []
+  OnEnterLinks:
   - Id:
       Value: 2425831376317465741
-  OnEnterLinks: []
   OnExitLinks: []
   Transitions:
   - Id: aa8c3930-4484-4bdc-b7a7-ba547cc8dee5
@@ -60,7 +62,7 @@ MonoBehaviour:
         Value: 40596724675142
     StateLink:
       Id:
-        Value: 611991089217075370
+        Value: 3608740417134982846
     TransitionSetLink:
       Id:
         Value: 0
@@ -87,6 +89,69 @@ MonoBehaviour:
       Value: 2425831376317465741
   Label: 
   Message: Idleeeeeeeeeeeee
+--- !u!114 &-3671014757562044163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd219b977eca364a9ee17b97096d5bd, type: 3}
+  m_Name: UpdateDestinationValueAction_QpAelaTxDUiMlQt
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|UpdateDestinationValueAction_QpAelaTxDUiMlQt
+    Guid:
+      Value: 2134054139591397388
+  Label: 
+  DestinationKey:
+    Key: Destination
+  HarvestEnabledKey:
+    Key: HarvestEnabled
+  TargetPosition:
+    X:
+      RawValue: 0
+    Y:
+      RawValue: 0
+    Z:
+      RawValue: 0
+--- !u!114 &-2204655411050946484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1225980562, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: DebugAction_x6ZgiajS1kCJUND
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|DebugAction_x6ZgiajS1kCJUND
+    Guid:
+      Value: 1201193005088234703
+  Label: 
+  Message: Goint to harvest
+--- !u!114 &-989133780124665622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96446f7568e04ab42b9a93862cc163cf, type: 3}
+  m_Name: SetDestinationAction_bW1DkF7P4UOb_Dc
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|SetDestinationAction_bW1DkF7P4UOb_Dc
+    Guid:
+      Value: 2924835544396685561
+  Label: 
 --- !u!114 &-911173688775121729
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,9 +198,147 @@ MonoBehaviour:
   - Id:
       Value: 3332297623119400489
   - Id:
+      Value: 3747249279017057761
+  - Id:
+      Value: 3608740417134982846
+  - Id:
       Value: 611991089217075370
   EventsNames: []
---- !u!114 &3563871614101405553
+--- !u!114 &4136932160691531716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1943870150, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: State_Delivery State_h9S2u-yKo0etaiI
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|State_Delivery
+      State_h9S2u-yKo0etaiI
+    Guid:
+      Value: 3747249279017057761
+  Label: Delivery State
+  Index: 1
+  OnUpdateLinks: []
+  OnEnterLinks: []
+  OnExitLinks: []
+  Transitions: []
+  ChildrenLinks: []
+  ParentLink:
+    Id:
+      Value: 0
+  Level: 0
+--- !u!114 &5656961740794743359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44326979b9fe5a64da08cded6c2a32ee, type: 3}
+  m_Name: HarvestEnergyAction_5EyeUwt_sUatrS0
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|HarvestEnergyAction_5EyeUwt_sUatrS0
+    Guid:
+      Value: 3510909483278608217
+  Label: 
+  HarvestEnabledKey:
+    Key: HarvestEnabled
+  HarvestRateKey:
+    Key: HarvestRate
+--- !u!114 &5821774250851008358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ce79ea556aa26b4e9c4a5c93125bb8a, type: 3}
+  m_Name: ReachedDestinationDecision_IEgMy-5L90SXd65
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|ReachedDestinationDecision_IEgMy-5L90SXd65
+    Guid:
+      Value: 128005805088048704
+  Label: 
+  TargetPositionKey:
+    Key: Destination
+  ReachThreshold:
+    RawValue: 98304
+--- !u!114 &6230435659835258691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1943870150, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: State_GoingToHarvest_XJ8FQS8pok2NxsY
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|State_GoingToHarvest_XJ8FQS8pok2NxsY
+    Guid:
+      Value: 3608740417134982846
+  Label: GoingToHarvest
+  Index: 0
+  OnUpdateLinks: []
+  OnEnterLinks:
+  - Id:
+      Value: 1981819062431467748
+  - Id:
+      Value: 1201193005088234703
+  OnExitLinks:
+  - Id:
+      Value: 2134054139591397388
+  - Id:
+      Value: 4271423464619292456
+  Transitions:
+  - Id: af0dae44-0559-4b25-99cb-130315431478
+    EventKey: 0
+    DecisionLink:
+      Id:
+        Value: 128005805088048704
+    StateLink:
+      Id:
+        Value: 611991089217075370
+    TransitionSetLink:
+      Id:
+        Value: 0
+  ChildrenLinks: []
+  ParentLink:
+    Id:
+      Value: 0
+  Level: 0
+--- !u!114 &6420985525563804624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1225980562, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: DebugAction_QgSVhVFM3U6rHyi
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|DebugAction_QgSVhVFM3U6rHyi
+    Guid:
+      Value: 4271423464619292456
+  Label: 
+  Message: Reached_________________________
+--- !u!114 &9047488349061675512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,11 +348,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96446f7568e04ab42b9a93862cc163cf, type: 3}
-  m_Name: SetDestinationAction_tVyZwuWz-U6XxTA
+  m_Name: SetDestinationAction_bbklAxuKc0qfdVT
   m_EditorClassIdentifier: 
   Identifier:
-    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|SetDestinationAction_tVyZwuWz-U6XxTA
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|SetDestinationAction_bbklAxuKc0qfdVT
     Guid:
-      Value: 888455955239420323
+      Value: 1981819062431467748
   Label: 
-  DestinationKey: 

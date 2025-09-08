@@ -35,18 +35,42 @@ namespace Quantum
             if (cfg == null) return;
 
             var spawner = filter.Spawner;
+
+            // Tick timer
             spawner->Timer += frame.DeltaTime;
 
-            if (spawner->Timer >= cfg.WaveIntervalSeconds)
+            // First wave uses initial delay (0 => instant)
+            if (spawner->CurrentWave == 0)
             {
-                SpawnWave(frame, cfg, spawner->CurrentWave);
-
-                spawner->CurrentWave += 1;
-                spawner->Timer = FP._0;
-
-                if (cfg.MaxWaves > 0 && spawner->CurrentWave >= cfg.MaxWaves)
+                FP firstDelay = cfg.InitialSpawnWaitSeconds; // or spawner->InitialSpawnWaitSeconds
+                if (spawner->Timer >= firstDelay)
                 {
-                    frame.Destroy(filter.Entity);
+                    SpawnWave(frame, cfg, 0);
+                    spawner->CurrentWave = 1;
+                    spawner->Timer = FP._0;
+
+                    if (cfg.MaxWaves == 1)
+                    {
+                        frame.Destroy(filter.Entity);
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                // Subsequent waves use the normal interval
+                if (spawner->Timer >= cfg.WaveIntervalSeconds)
+                {
+                    SpawnWave(frame, cfg, spawner->CurrentWave);
+
+                    spawner->CurrentWave += 1;
+                    spawner->Timer = FP._0;
+
+                    if (cfg.MaxWaves > 0 && spawner->CurrentWave >= cfg.MaxWaves)
+                    {
+                        frame.Destroy(filter.Entity);
+                        return;
+                    }
                 }
             }
 
@@ -115,7 +139,9 @@ namespace Quantum
                         // SetBlackboardValues(frame, entity, blackboardAsset);
                         Log.Info("22222222222222___");
 
-                        blackboardAsset->Set(frame, "MoveToTarget", cfg.TargetPos);
+                        blackboardAsset->Set(frame, "Destination", cfg.TargetPos);
+                        blackboardAsset->Set(frame, "HarvestEnabled", false);
+                        blackboardAsset->Set(frame, "HarvestRate", cfg.HarvestRate);
                         // blackboardAsset.
                     }
                 }
@@ -139,6 +165,14 @@ namespace Quantum
                     transform->Position = position;
                     transform->Rotation = rotation;
                 }
+
+                // ✅ Add MinionEnergy component
+                frame.Set(entity, new HarvesterEnergy
+                {
+                    HarvestRate = cfg.HarvestRate, // Define this in MinionWaveConfig
+                    CurrentEnergy = FP._0,
+                    MaxEnergy = cfg.MaxHarvest      // Define this in MinionWaveConfig
+                });
 
 
                 // ✅ The View component is already set from the prototype!

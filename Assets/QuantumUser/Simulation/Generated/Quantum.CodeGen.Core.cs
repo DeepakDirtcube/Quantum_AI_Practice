@@ -1125,6 +1125,32 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct HarvesterEnergy : Quantum.IComponent {
+    public const Int32 SIZE = 24;
+    public const Int32 ALIGNMENT = 8;
+    [FieldOffset(8)]
+    public FP HarvestRate;
+    [FieldOffset(0)]
+    public FP CurrentEnergy;
+    [FieldOffset(16)]
+    public FP MaxEnergy;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 10723;
+        hash = hash * 31 + HarvestRate.GetHashCode();
+        hash = hash * 31 + CurrentEnergy.GetHashCode();
+        hash = hash * 31 + MaxEnergy.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (HarvesterEnergy*)ptr;
+        FP.Serialize(&p->CurrentEnergy, serializer);
+        FP.Serialize(&p->HarvestRate, serializer);
+        FP.Serialize(&p->MaxEnergy, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct Health : Quantum.IComponent {
     public const Int32 SIZE = 32;
     public const Int32 ALIGNMENT = 8;
@@ -1584,6 +1610,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<Quantum.Gameplay>();
       BuildSignalsArrayOnComponentAdded<HFSMAgent>();
       BuildSignalsArrayOnComponentRemoved<HFSMAgent>();
+      BuildSignalsArrayOnComponentAdded<Quantum.HarvesterEnergy>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.HarvesterEnergy>();
       BuildSignalsArrayOnComponentAdded<Quantum.Health>();
       BuildSignalsArrayOnComponentRemoved<Quantum.Health>();
       BuildSignalsArrayOnComponentAdded<Quantum.KCC>();
@@ -1753,6 +1781,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum.Gameplay), Quantum.Gameplay.SIZE);
       typeRegistry.Register(typeof(HFSMAgent), HFSMAgent.SIZE);
       typeRegistry.Register(typeof(HFSMData), HFSMData.SIZE);
+      typeRegistry.Register(typeof(Quantum.HarvesterEnergy), Quantum.HarvesterEnergy.SIZE);
       typeRegistry.Register(typeof(Quantum.Health), Quantum.Health.SIZE);
       typeRegistry.Register(typeof(Quantum.HealthPickup), Quantum.HealthPickup.SIZE);
       typeRegistry.Register(typeof(HingeJoint), HingeJoint.SIZE);
@@ -1827,13 +1856,14 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 17)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 18)
         .AddBuiltInComponents()
         .Add<AIBlackboardComponent>(AIBlackboardComponent.Serialize, AIBlackboardComponent.OnAdded, AIBlackboardComponent.OnRemoved, ComponentFlags.None)
         .Add<BTAgent>(BTAgent.Serialize, BTAgent.OnAdded, BTAgent.OnRemoved, ComponentFlags.None)
         .Add<BotSDKGlobals>(BotSDKGlobals.Serialize, BotSDKGlobals.OnAdded, BotSDKGlobals.OnRemoved, ComponentFlags.Singleton)
         .Add<Quantum.Gameplay>(Quantum.Gameplay.Serialize, Quantum.Gameplay.OnAdded, Quantum.Gameplay.OnRemoved, ComponentFlags.Singleton)
         .Add<HFSMAgent>(HFSMAgent.Serialize, HFSMAgent.OnAdded, HFSMAgent.OnRemoved, ComponentFlags.None)
+        .Add<Quantum.HarvesterEnergy>(Quantum.HarvesterEnergy.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Health>(Quantum.Health.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.KCC>(Quantum.KCC.Serialize, null, Quantum.KCC.OnRemoved, ComponentFlags.None)
         .Add<Quantum.KCCProcessorLink>(Quantum.KCCProcessorLink.Serialize, null, null, ComponentFlags.None)

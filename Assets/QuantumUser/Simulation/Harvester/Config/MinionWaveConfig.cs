@@ -1,6 +1,8 @@
 namespace Quantum
 {
     using Photon.Deterministic;
+    using UnityEngine;
+
 
     /// <summary>
     /// Make a Scriptable Quantum Config via "Create ▸ Quantum ▸ Config ▸ Minion Wave Config".
@@ -21,8 +23,14 @@ namespace Quantum
 
         public FP InitialDelaySeconds = FP._1;     // ⏱️ Delay before first wave
         public FP WaveIntervalSeconds = FP._5;     // ⏱️ Time between waves
+        public FP InitialSpawnWaitSeconds = FP._1; // ⏱️ Delay before first minion spawn
         public FP DefaultLifeAfterReturnSeconds = FP._5;
-        public int MaxWaves = 0;                   // 0 = infinite
+        public int MaxWaves = 0;
+
+        [Header("Harvest Config")]
+
+        public FP MaxHarvest = FP._10; // Maximum energy a minion can collect            // 0 = infinite
+        public FP HarvestRate = FP._1; // Energy collected per second when harvesting  // 0 = no harvesting
     }
     // Extend your RuntimeConfig (Quantum auto-generates partial class).
     public partial class RuntimeConfig

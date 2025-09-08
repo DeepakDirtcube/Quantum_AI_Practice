@@ -1,0 +1,7 @@
+// Assets/QuantumUser/Simulation/Components/HarvesterEnergy.qtn
+component HarvesterEnergy
+{
+    FP HarvestRate;//
+    FP CurrentEnergy; // current harvested energy
+    FP MaxEnergy;     // maximum allowed energy
+}

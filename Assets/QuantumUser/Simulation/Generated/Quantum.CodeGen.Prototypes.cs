@@ -96,6 +96,25 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.HarvesterEnergy))]
+  public unsafe partial class HarvesterEnergyPrototype : ComponentPrototype<Quantum.HarvesterEnergy> {
+    public FP HarvestRate;
+    public FP CurrentEnergy;
+    public FP MaxEnergy;
+    partial void MaterializeUser(Frame frame, ref Quantum.HarvesterEnergy result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.HarvesterEnergy component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.HarvesterEnergy result, in PrototypeMaterializationContext context = default) {
+        result.HarvestRate = this.HarvestRate;
+        result.CurrentEnergy = this.CurrentEnergy;
+        result.MaxEnergy = this.MaxEnergy;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.Health))]
   public unsafe partial class HealthPrototype : ComponentPrototype<Quantum.Health> {
     public FP MaxHealth;
