@@ -1129,15 +1129,18 @@ namespace Quantum {
     public const Int32 SIZE = 24;
     public const Int32 ALIGNMENT = 8;
     [FieldOffset(8)]
-    public FP HarvestRate;
-    [FieldOffset(0)]
-    public FP CurrentEnergy;
+    public QBoolean UseTimeMode;
     [FieldOffset(16)]
-    public FP MaxEnergy;
+    public FP HarvestParam;
+    [FieldOffset(0)]
+    public Int32 CurrentEnergy;
+    [FieldOffset(4)]
+    public Int32 MaxEnergy;
     public override readonly Int32 GetHashCode() {
       unchecked { 
         var hash = 10723;
-        hash = hash * 31 + HarvestRate.GetHashCode();
+        hash = hash * 31 + UseTimeMode.GetHashCode();
+        hash = hash * 31 + HarvestParam.GetHashCode();
         hash = hash * 31 + CurrentEnergy.GetHashCode();
         hash = hash * 31 + MaxEnergy.GetHashCode();
         return hash;
@@ -1145,9 +1148,10 @@ namespace Quantum {
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (HarvesterEnergy*)ptr;
-        FP.Serialize(&p->CurrentEnergy, serializer);
-        FP.Serialize(&p->HarvestRate, serializer);
-        FP.Serialize(&p->MaxEnergy, serializer);
+        serializer.Stream.Serialize(&p->CurrentEnergy);
+        serializer.Stream.Serialize(&p->MaxEnergy);
+        QBoolean.Serialize(&p->UseTimeMode, serializer);
+        FP.Serialize(&p->HarvestParam, serializer);
     }
   }
   [StructLayout(LayoutKind.Explicit)]

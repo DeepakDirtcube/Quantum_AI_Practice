@@ -31,6 +31,7 @@ namespace Quantum
 
         public FP MaxHarvest = FP._10; // Maximum energy a minion can collect            // 0 = infinite
         public FP HarvestRate = FP._1; // Energy collected per second when harvesting  // 0 = no harvesting
+        public bool IsHarvestTimeBased = false; // true: HarvestRate is seconds-to-full; false: units-per-second
     }
     // Extend your RuntimeConfig (Quantum auto-generates partial class).
     public partial class RuntimeConfig

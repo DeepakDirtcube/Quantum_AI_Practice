@@ -1,7 +1,8 @@
 // Assets/QuantumUser/Simulation/Components/HarvesterEnergy.qtn
 component HarvesterEnergy
 {
-    FP HarvestRate;//
-    FP CurrentEnergy; // current harvested energy
-    FP MaxEnergy;     // maximum allowed energy
+    bool UseTimeMode;  // true: HarvestParam is seconds-to-full; false: units-per-second
+    FP   HarvestParam; // meaning depends on UseTimeMode
+    int  CurrentEnergy; // current harvested energy (integer units)
+    int  MaxEnergy;     // maximum allowed energy (integer units)
 }

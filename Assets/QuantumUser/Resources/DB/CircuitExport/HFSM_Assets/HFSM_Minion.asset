@@ -253,6 +253,12 @@ MonoBehaviour:
     Key: HarvestEnabled
   HarvestRateKey:
     Key: HarvestRate
+  DestinationKey:
+    Key: 
+  HarvestInitialDistanceKey:
+    Key: HarvestInitialDistanceKey
+  HarvestAccumulatedKey:
+    Key: HarvestAccumulatedKey
 --- !u!114 &5821774250851008358
 MonoBehaviour:
   m_ObjectHideFlags: 0

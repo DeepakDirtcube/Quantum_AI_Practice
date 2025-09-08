@@ -169,9 +169,10 @@ namespace Quantum
                 // ✅ Add MinionEnergy component
                 frame.Set(entity, new HarvesterEnergy
                 {
-                    HarvestRate = cfg.HarvestRate, // Define this in MinionWaveConfig
-                    CurrentEnergy = FP._0,
-                    MaxEnergy = cfg.MaxHarvest      // Define this in MinionWaveConfig
+                    UseTimeMode = cfg.IsHarvestTimeBased, // default to time-based (seconds-to-full)
+                    HarvestParam = cfg.HarvestRate, // reuse config field as param
+                    CurrentEnergy = 0,
+                    MaxEnergy = FPMath.RoundToInt(cfg.MaxHarvest) // FP -> int cap
                 });
 
 

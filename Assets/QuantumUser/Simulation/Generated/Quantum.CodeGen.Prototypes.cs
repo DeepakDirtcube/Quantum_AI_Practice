@@ -98,9 +98,10 @@ namespace Quantum.Prototypes {
   [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.HarvesterEnergy))]
   public unsafe partial class HarvesterEnergyPrototype : ComponentPrototype<Quantum.HarvesterEnergy> {
-    public FP HarvestRate;
-    public FP CurrentEnergy;
-    public FP MaxEnergy;
+    public QBoolean UseTimeMode;
+    public FP HarvestParam;
+    public Int32 CurrentEnergy;
+    public Int32 MaxEnergy;
     partial void MaterializeUser(Frame frame, ref Quantum.HarvesterEnergy result, in PrototypeMaterializationContext context);
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
         Quantum.HarvesterEnergy component = default;
@@ -108,7 +109,8 @@ namespace Quantum.Prototypes {
         return f.Set(entity, component) == SetResult.ComponentAdded;
     }
     public void Materialize(Frame frame, ref Quantum.HarvesterEnergy result, in PrototypeMaterializationContext context = default) {
-        result.HarvestRate = this.HarvestRate;
+        result.UseTimeMode = this.UseTimeMode;
+        result.HarvestParam = this.HarvestParam;
         result.CurrentEnergy = this.CurrentEnergy;
         result.MaxEnergy = this.MaxEnergy;
         MaterializeUser(frame, ref result, in context);

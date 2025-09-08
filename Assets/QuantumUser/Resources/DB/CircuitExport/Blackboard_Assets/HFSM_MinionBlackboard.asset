@@ -23,6 +23,12 @@ MonoBehaviour:
   - Type: 3
     Key:
       Key: HarvestRate
+  - Type: 3
+    Key:
+      Key: HarvestInitialDistanceKey
+  - Type: 3
+    Key:
+      Key: HarvestAccumulatedKey
   - Type: 5
     Key:
       Key: Destination

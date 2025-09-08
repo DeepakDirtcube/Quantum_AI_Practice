@@ -30473,7 +30473,7 @@ MonoBehaviour:
         Id:
           Value: 1305725011185944771
       DefaultStoppingDistance:
-        RawValue: 32768
+        RawValue: 65536
       WaitAtEndpointsSeconds:
         RawValue: 0
       InitialDelaySeconds:
@@ -30488,7 +30488,7 @@ MonoBehaviour:
       MaxHarvest:
         RawValue: 655360
       HarvestRate:
-        RawValue: 65536
+        RawValue: 196608
     CollectorsSampleConfig:
       PlayerCollectorPrototype:
         Id:
