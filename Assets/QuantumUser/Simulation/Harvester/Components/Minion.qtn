@@ -18,5 +18,7 @@ component Minion {
 component MinionWaveSpawner {
   int CurrentWave;
   FP Timer;
+  [AllocateOnComponentAdded]
+  [FreeOnComponentRemoved]
   list<EntityRef> SpawnedMinions;
 }

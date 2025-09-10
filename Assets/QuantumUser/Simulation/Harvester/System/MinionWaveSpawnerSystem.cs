@@ -11,30 +11,33 @@ namespace Quantum
         {
             public EntityRef Entity;
             public MinionWaveSpawner* Spawner;
+            public MinionWaveSettings* Settings;
         }
 
         private List<(EntityRef entity, FP timer)> _spawnedMinions = new();
 
         public override void OnInit(Frame frame)
         {
-            var cfg = frame.RuntimeConfig.MinionWave;
-            if (cfg == null) return;
-
-            var e = frame.Create();
-            frame.Set(e, new MinionWaveSpawner
-            {
-                CurrentWave = 0,
-                Timer = -cfg.InitialDelaySeconds
-            });
-            HarvesterHelper.SetupAsBot(frame, e);
+            // No-op: spawn-managers are created by SpawnManagerInitSystem.
         }
 
         public override void Update(Frame frame, ref Filter filter)
         {
-            var cfg = frame.RuntimeConfig.MinionWave;
+            var cfg = filter.Settings;
             if (cfg == null) return;
 
             var spawner = filter.Spawner;
+
+            // Ensure component list is allocated and prune dead refs
+            frame.TryAllocateList(ref spawner->SpawnedMinions);
+            var spawnedList = frame.ResolveList(spawner->SpawnedMinions);
+            for (int i = spawnedList.Count - 1; i >= 0; --i)
+            {
+                if (!frame.Exists(spawnedList[i]))
+                {
+                    spawnedList.RemoveAt(i);
+                }
+            }
 
             // Tick timer
             spawner->Timer += frame.DeltaTime;
@@ -42,16 +45,16 @@ namespace Quantum
             // First wave uses initial delay (0 => instant)
             if (spawner->CurrentWave == 0)
             {
-                FP firstDelay = cfg.InitialSpawnWaitSeconds; // or spawner->InitialSpawnWaitSeconds
+                FP firstDelay = cfg->InitialSpawnWaitSeconds; // or spawner->InitialSpawnWaitSeconds
                 if (spawner->Timer >= firstDelay)
                 {
-                    SpawnWave(frame, cfg, 0);
+                    SpawnWave(frame, spawner, cfg, 0);
                     spawner->CurrentWave = 1;
                     spawner->Timer = FP._0;
 
-                    if (cfg.MaxWaves == 1)
+                    // If MaxWaves == 1, just stop spawning further waves; keep spawner alive.
+                    if (cfg->MaxWaves == 1)
                     {
-                        frame.Destroy(filter.Entity);
                         return;
                     }
                 }
@@ -59,16 +62,16 @@ namespace Quantum
             else
             {
                 // Subsequent waves use the normal interval
-                if (spawner->Timer >= cfg.WaveIntervalSeconds)
+                if (spawner->Timer >= cfg->WaveIntervalSeconds)
                 {
-                    SpawnWave(frame, cfg, spawner->CurrentWave);
+                    SpawnWave(frame, spawner, cfg, spawner->CurrentWave);
 
                     spawner->CurrentWave += 1;
                     spawner->Timer = FP._0;
 
-                    if (cfg.MaxWaves > 0 && spawner->CurrentWave >= cfg.MaxWaves)
+                    // If MaxWaves limit reached, stop spawning; keep spawner alive.
+                    if (cfg->MaxWaves > 0 && spawner->CurrentWave >= cfg->MaxWaves)
                     {
-                        frame.Destroy(filter.Entity);
                         return;
                     }
                 }
@@ -99,10 +102,10 @@ namespace Quantum
         /// <summary>
         /// CHANGED: Now uses Entity Prototype instead of manual entity creation
         /// </summary>
-        private void SpawnWave(Frame frame, MinionWaveConfig cfg, int waveIndex)
+        private void SpawnWave(Frame frame, MinionWaveSpawner* spawner, MinionWaveSettings* cfg, int waveIndex)
         {
             // ✅ NEW: Validate that we have a prototype reference
-            if (!cfg.MinionPrototype.Id.IsValid)
+            if (!cfg->MinionPrototype.Id.IsValid)
             {
                 Log.Error("MinionWaveConfig.MinionPrototype is not set! Please assign a QuantumEntityPrototype asset.");
                 return;
@@ -116,16 +119,16 @@ namespace Quantum
             //     return;
             // }
 
-            for (int i = 0; i < cfg.Count; i++)
+            for (int i = 0; i < cfg->Count; i++)
             {
                 // ✅ NEW: Spawn from prototype instead of manual creation
                 var spawnOffset = new FPVector3((i % 4) * FP._1, 0, (i / 4) * FP._1);
-                var position = cfg.SpawnPos + spawnOffset;
+                var position = cfg->SpawnPos + spawnOffset;
                 var rotation = FPQuaternion.Identity;
 
 
                 // This creates the entity with ALL components from the prototype
-                var entity = frame.Create(cfg.MinionPrototype);
+                var entity = frame.Create(cfg->MinionPrototype);
                 if (frame.TryGet<HFSMAgent>(entity, out var hfsmAgent) == true)
                 {
                     BotSDKDebuggerSystem.AddToDebugger(frame, entity, hfsmAgent);
@@ -139,9 +142,9 @@ namespace Quantum
                         // SetBlackboardValues(frame, entity, blackboardAsset);
                         Log.Info("22222222222222___");
 
-                        blackboardAsset->Set(frame, "Destination", cfg.TargetPos);
+                        blackboardAsset->Set(frame, "Destination", cfg->TargetPos);
                         blackboardAsset->Set(frame, "HarvestEnabled", false);
-                        blackboardAsset->Set(frame, "HarvestRate", cfg.HarvestRate);
+                        blackboardAsset->Set(frame, "HarvestRate", cfg->HarvestRate);
                         // blackboardAsset.
                     }
                 }
@@ -150,12 +153,12 @@ namespace Quantum
                 if (frame.Has<Minion>(entity))
                 {
                     var minion = frame.Unsafe.GetPointer<Minion>(entity);
-                    minion->SpawnPos = cfg.SpawnPos;
-                    minion->TargetPos = cfg.TargetPos;
+                    minion->SpawnPos = cfg->SpawnPos;
+                    minion->TargetPos = cfg->TargetPos;
                     minion->State = MinionState.GoingToTarget;
-                    minion->StoppingDistance = cfg.DefaultStoppingDistance;
+                    minion->StoppingDistance = cfg->DefaultStoppingDistance;
                     minion->WaitTimer = FP._0;
-                    minion->LifeAfterReturnSeconds = cfg.DefaultLifeAfterReturnSeconds;
+                    minion->LifeAfterReturnSeconds = cfg->DefaultLifeAfterReturnSeconds;
                 }
 
                 // ✅ NEW: Override transform position if needed (prototype might have different position)
@@ -169,22 +172,25 @@ namespace Quantum
                 // ✅ Add MinionEnergy component
                 frame.Set(entity, new HarvesterEnergy
                 {
-                    UseTimeMode = cfg.IsHarvestTimeBased, // default to time-based (seconds-to-full)
-                    HarvestParam = cfg.HarvestRate, // reuse config field as param
+                    UseTimeMode = cfg->IsHarvestTimeBased, // default to time-based (seconds-to-full)
+                    HarvestParam = cfg->HarvestRate, // reuse config field as param
                     CurrentEnergy = 0,
-                    MaxEnergy = FPMath.RoundToInt(cfg.MaxHarvest) // FP -> int cap
+                    MaxEnergy = FPMath.RoundToInt(cfg->MaxHarvest) // FP -> int cap
                 });
 
 
                 // ✅ The View component is already set from the prototype!
                 // No need to manually set it - the prototype handles this
 
+                // Track locally for timer behavior
                 _spawnedMinions.Add((entity, FP._0));
+                // Also track on the component list for external systems to query
+                frame.ResolveList(spawner->SpawnedMinions).Add(entity);
 
                 // Log.Debug($"Spawned minion {entity} at wave {waveIndex}, position {i}");
             }
 
-            Log.Info($"Wave {waveIndex} spawned: {cfg.Count} minions");
+            Log.Info($"Wave {waveIndex} spawned: {cfg->Count} minions");
         }
 
 
@@ -221,8 +227,21 @@ namespace Quantum
                     continue;
                 }
 
-                var minion = frame.Unsafe.GetPointer<Minion>(entity);
-                if (minion->State == MinionState.GoingToTarget)
+                if (!frame.Unsafe.TryGetPointer<Minion>(entity, out var minion))
+                {
+                    _spawnedMinions.RemoveAt(i);
+                    continue;
+                }
+                // Use proximity to spawn to decide when to start the despawn countdown
+                bool __nearSpawn = false;
+                if (frame.Unsafe.TryGetPointer<Transform3D>(entity, out var __transform))
+                {
+                    var __delta = __transform->Position - minion->SpawnPos;
+                    var __epsilon = FP._1 / 100;
+                    var __stop = minion->StoppingDistance + __epsilon;
+                    __nearSpawn = __delta.SqrMagnitude <= __stop * __stop;
+                }
+                if (minion->LifeAfterReturnSeconds > FP._0 && __nearSpawn)
                 {
                     timer += frame.DeltaTime;
 
@@ -234,6 +253,11 @@ namespace Quantum
                     }
 
                     _spawnedMinions[i] = (entity, timer);
+                }
+                else
+                {
+                    // Reset timer while not near spawn
+                    _spawnedMinions[i] = (entity, FP._0);
                 }
             }
         }

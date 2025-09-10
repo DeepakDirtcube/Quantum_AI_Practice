@@ -365,10 +365,53 @@ namespace Quantum.Prototypes {
     }
   }
   [System.SerializableAttribute()]
+  [Quantum.Prototypes.Prototype(typeof(Quantum.MinionWaveSettings))]
+  public unsafe partial class MinionWaveSettingsPrototype : ComponentPrototype<Quantum.MinionWaveSettings> {
+    public Int32 Count;
+    public FPVector3 SpawnPos;
+    public FPVector3 TargetPos;
+    public AssetRef<EntityPrototype> MinionPrototype;
+    public FP DefaultStoppingDistance;
+    public FP WaitAtEndpointsSeconds;
+    public FP InitialDelaySeconds;
+    public FP WaveIntervalSeconds;
+    public FP InitialSpawnWaitSeconds;
+    public FP DefaultLifeAfterReturnSeconds;
+    public Int32 MaxWaves;
+    public FP MaxHarvest;
+    public FP HarvestRate;
+    public QBoolean IsHarvestTimeBased;
+    partial void MaterializeUser(Frame frame, ref Quantum.MinionWaveSettings result, in PrototypeMaterializationContext context);
+    public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {
+        Quantum.MinionWaveSettings component = default;
+        Materialize((Frame)f, ref component, in context);
+        return f.Set(entity, component) == SetResult.ComponentAdded;
+    }
+    public void Materialize(Frame frame, ref Quantum.MinionWaveSettings result, in PrototypeMaterializationContext context = default) {
+        result.Count = this.Count;
+        result.SpawnPos = this.SpawnPos;
+        result.TargetPos = this.TargetPos;
+        result.MinionPrototype = this.MinionPrototype;
+        result.DefaultStoppingDistance = this.DefaultStoppingDistance;
+        result.WaitAtEndpointsSeconds = this.WaitAtEndpointsSeconds;
+        result.InitialDelaySeconds = this.InitialDelaySeconds;
+        result.WaveIntervalSeconds = this.WaveIntervalSeconds;
+        result.InitialSpawnWaitSeconds = this.InitialSpawnWaitSeconds;
+        result.DefaultLifeAfterReturnSeconds = this.DefaultLifeAfterReturnSeconds;
+        result.MaxWaves = this.MaxWaves;
+        result.MaxHarvest = this.MaxHarvest;
+        result.HarvestRate = this.HarvestRate;
+        result.IsHarvestTimeBased = this.IsHarvestTimeBased;
+        MaterializeUser(frame, ref result, in context);
+    }
+  }
+  [System.SerializableAttribute()]
   [Quantum.Prototypes.Prototype(typeof(Quantum.MinionWaveSpawner))]
   public unsafe class MinionWaveSpawnerPrototype : ComponentPrototype<Quantum.MinionWaveSpawner> {
     public Int32 CurrentWave;
     public FP Timer;
+    [AllocateOnComponentAdded()]
+    [FreeOnComponentRemoved()]
     [DynamicCollectionAttribute()]
     public MapEntityId[] SpawnedMinions = {};
     public override Boolean AddToEntity(FrameBase f, EntityRef entity, in PrototypeMaterializationContext context) {

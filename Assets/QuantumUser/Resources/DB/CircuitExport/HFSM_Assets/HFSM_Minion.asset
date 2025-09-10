@@ -17,7 +17,7 @@ MonoBehaviour:
     Guid:
       Value: 611991089217075370
   Label: HarvestingState
-  Index: 3
+  Index: 4
   OnUpdateLinks:
   - Id:
       Value: 3510909483278608217
@@ -48,7 +48,7 @@ MonoBehaviour:
     Guid:
       Value: 3332297623119400489
   Label: Idle
-  Index: 2
+  Index: 3
   OnUpdateLinks: []
   OnEnterLinks:
   - Id:
@@ -198,6 +198,8 @@ MonoBehaviour:
   - Id:
       Value: 3332297623119400489
   - Id:
+      Value: 1554994878774694805
+  - Id:
       Value: 3747249279017057761
   - Id:
       Value: 3608740417134982846
@@ -222,7 +224,7 @@ MonoBehaviour:
     Guid:
       Value: 3747249279017057761
   Label: Delivery State
-  Index: 1
+  Index: 2
   OnUpdateLinks: []
   OnEnterLinks: []
   OnExitLinks: []
@@ -344,6 +346,33 @@ MonoBehaviour:
       Value: 4271423464619292456
   Label: 
   Message: Reached_________________________
+--- !u!114 &8932089410711071120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1943870150, guid: 19b3f061e0d562b4a97261f0aa32250f, type: 3}
+  m_Name: State_MiningState_UNals0QiW0mcfBc
+  m_EditorClassIdentifier: 
+  Identifier:
+    Path: QuantumUser/Resources/DB/CircuitExport/HFSM_Assets/HFSM_Minion|State_MiningState_UNals0QiW0mcfBc
+    Guid:
+      Value: 1554994878774694805
+  Label: MiningState
+  Index: 1
+  OnUpdateLinks: []
+  OnEnterLinks: []
+  OnExitLinks: []
+  Transitions: []
+  ChildrenLinks: []
+  ParentLink:
+    Id:
+      Value: 0
+  Level: 0
 --- !u!114 &9047488349061675512
 MonoBehaviour:
   m_ObjectHideFlags: 0

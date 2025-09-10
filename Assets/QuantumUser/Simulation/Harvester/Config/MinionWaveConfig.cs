@@ -36,6 +36,8 @@ namespace Quantum
     // Extend your RuntimeConfig (Quantum auto-generates partial class).
     public partial class RuntimeConfig
     {
-        public MinionWaveConfig MinionWave;
+        // public MinionWaveConfig MinionWave;
+        public AssetRef<EntityPrototype> Team1MinionSpawner;
+        // public AssetRef<EntityPrototype> TeamBMinionSpawner;
     }
 }

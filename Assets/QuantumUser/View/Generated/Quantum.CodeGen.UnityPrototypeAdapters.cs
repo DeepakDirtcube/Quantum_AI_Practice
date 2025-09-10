@@ -105,6 +105,8 @@ namespace Quantum.Prototypes.Unity {
   public unsafe partial class MinionWaveSpawnerPrototype : Quantum.QuantumUnityPrototypeAdapter<Quantum.Prototypes.MinionWaveSpawnerPrototype> {
     public Int32 CurrentWave;
     public FP Timer;
+    [AllocateOnComponentAdded()]
+    [FreeOnComponentRemoved()]
     [DynamicCollectionAttribute()]
     public Quantum.QuantumEntityPrototype[] SpawnedMinions = {};
     partial void ConvertUser(Quantum.QuantumEntityPrototypeConverter converter, ref Quantum.Prototypes.MinionWaveSpawnerPrototype prototype);

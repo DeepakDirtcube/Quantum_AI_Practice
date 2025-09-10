@@ -1,0 +1,24 @@
+// Per-spawner wave settings component.
+// Attach this to your spawn-manager prototype entities so each spawner
+// can control its own wave parameters and minion prototype.
+component MinionWaveSettings {
+  int       Count;                    // number of minions per wave
+  FPVector3 SpawnPos;                 // base spawn position
+  FPVector3 TargetPos;                // target position/mining spot
+  AssetRef<EntityPrototype> MinionPrototype; // prototype to spawn for minions
+
+  FP  DefaultStoppingDistance;        // nav stopping distance
+  FP  WaitAtEndpointsSeconds;         // wait time when reaching ends
+
+  FP  InitialDelaySeconds;            // delay before very first wave
+  FP  WaveIntervalSeconds;            // time between subsequent waves
+  FP  InitialSpawnWaitSeconds;        // extra delay before first minion
+  FP  DefaultLifeAfterReturnSeconds;  // lifetime once back at spawn
+  int MaxWaves;                       // 0 = infinite
+
+  // Harvest parameters for spawned minions
+  FP   MaxHarvest;          // 0 = infinite
+  FP   HarvestRate;         // units per second (or seconds-to-full if time based)
+  bool IsHarvestTimeBased;  // true => HarvestRate is seconds-to-full
+}
+

@@ -1348,6 +1348,76 @@ namespace Quantum {
     }
   }
   [StructLayout(LayoutKind.Explicit)]
+  public unsafe partial struct MinionWaveSettings : Quantum.IComponent {
+    public const Int32 SIZE = 136;
+    public const Int32 ALIGNMENT = 8;
+    [FieldOffset(0)]
+    public Int32 Count;
+    [FieldOffset(88)]
+    public FPVector3 SpawnPos;
+    [FieldOffset(112)]
+    public FPVector3 TargetPos;
+    [FieldOffset(16)]
+    public AssetRef<EntityPrototype> MinionPrototype;
+    [FieldOffset(32)]
+    public FP DefaultStoppingDistance;
+    [FieldOffset(72)]
+    public FP WaitAtEndpointsSeconds;
+    [FieldOffset(48)]
+    public FP InitialDelaySeconds;
+    [FieldOffset(80)]
+    public FP WaveIntervalSeconds;
+    [FieldOffset(56)]
+    public FP InitialSpawnWaitSeconds;
+    [FieldOffset(24)]
+    public FP DefaultLifeAfterReturnSeconds;
+    [FieldOffset(4)]
+    public Int32 MaxWaves;
+    [FieldOffset(64)]
+    public FP MaxHarvest;
+    [FieldOffset(40)]
+    public FP HarvestRate;
+    [FieldOffset(8)]
+    public QBoolean IsHarvestTimeBased;
+    public override readonly Int32 GetHashCode() {
+      unchecked { 
+        var hash = 19973;
+        hash = hash * 31 + Count.GetHashCode();
+        hash = hash * 31 + SpawnPos.GetHashCode();
+        hash = hash * 31 + TargetPos.GetHashCode();
+        hash = hash * 31 + MinionPrototype.GetHashCode();
+        hash = hash * 31 + DefaultStoppingDistance.GetHashCode();
+        hash = hash * 31 + WaitAtEndpointsSeconds.GetHashCode();
+        hash = hash * 31 + InitialDelaySeconds.GetHashCode();
+        hash = hash * 31 + WaveIntervalSeconds.GetHashCode();
+        hash = hash * 31 + InitialSpawnWaitSeconds.GetHashCode();
+        hash = hash * 31 + DefaultLifeAfterReturnSeconds.GetHashCode();
+        hash = hash * 31 + MaxWaves.GetHashCode();
+        hash = hash * 31 + MaxHarvest.GetHashCode();
+        hash = hash * 31 + HarvestRate.GetHashCode();
+        hash = hash * 31 + IsHarvestTimeBased.GetHashCode();
+        return hash;
+      }
+    }
+    public static void Serialize(void* ptr, FrameSerializer serializer) {
+        var p = (MinionWaveSettings*)ptr;
+        serializer.Stream.Serialize(&p->Count);
+        serializer.Stream.Serialize(&p->MaxWaves);
+        QBoolean.Serialize(&p->IsHarvestTimeBased, serializer);
+        AssetRef.Serialize(&p->MinionPrototype, serializer);
+        FP.Serialize(&p->DefaultLifeAfterReturnSeconds, serializer);
+        FP.Serialize(&p->DefaultStoppingDistance, serializer);
+        FP.Serialize(&p->HarvestRate, serializer);
+        FP.Serialize(&p->InitialDelaySeconds, serializer);
+        FP.Serialize(&p->InitialSpawnWaitSeconds, serializer);
+        FP.Serialize(&p->MaxHarvest, serializer);
+        FP.Serialize(&p->WaitAtEndpointsSeconds, serializer);
+        FP.Serialize(&p->WaveIntervalSeconds, serializer);
+        FPVector3.Serialize(&p->SpawnPos, serializer);
+        FPVector3.Serialize(&p->TargetPos, serializer);
+    }
+  }
+  [StructLayout(LayoutKind.Explicit)]
   public unsafe partial struct MinionWaveSpawner : Quantum.IComponent {
     public const Int32 SIZE = 16;
     public const Int32 ALIGNMENT = 8;
@@ -1356,6 +1426,8 @@ namespace Quantum {
     [FieldOffset(8)]
     public FP Timer;
     [FieldOffset(4)]
+    [AllocateOnComponentAdded()]
+    [FreeOnComponentRemoved()]
     public QListPtr<EntityRef> SpawnedMinions;
     public override readonly Int32 GetHashCode() {
       unchecked { 
@@ -1367,11 +1439,18 @@ namespace Quantum {
       }
     }
     public void ClearPointers(FrameBase f, EntityRef entity) {
-      SpawnedMinions = default;
+      if (SpawnedMinions != default) f.FreeList(ref SpawnedMinions);
     }
     public static void OnRemoved(FrameBase frame, EntityRef entity, void* ptr) {
       var p = (Quantum.MinionWaveSpawner*)ptr;
       p->ClearPointers((Frame)frame, entity);
+    }
+    public void AllocatePointers(FrameBase f, EntityRef entity) {
+      f.TryAllocateList(ref SpawnedMinions);
+    }
+    public static void OnAdded(FrameBase frame, EntityRef entity, void* ptr) {
+      var p = (Quantum.MinionWaveSpawner*)ptr;
+      p->AllocatePointers((Frame)frame, entity);
     }
     public static void Serialize(void* ptr, FrameSerializer serializer) {
         var p = (MinionWaveSpawner*)ptr;
@@ -1630,6 +1709,8 @@ namespace Quantum {
       BuildSignalsArrayOnComponentRemoved<MapEntityLink>();
       BuildSignalsArrayOnComponentAdded<Quantum.Minion>();
       BuildSignalsArrayOnComponentRemoved<Quantum.Minion>();
+      BuildSignalsArrayOnComponentAdded<Quantum.MinionWaveSettings>();
+      BuildSignalsArrayOnComponentRemoved<Quantum.MinionWaveSettings>();
       BuildSignalsArrayOnComponentAdded<Quantum.MinionWaveSpawner>();
       BuildSignalsArrayOnComponentRemoved<Quantum.MinionWaveSpawner>();
       BuildSignalsArrayOnComponentAdded<NavMeshAvoidanceAgent>();
@@ -1814,6 +1895,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(MapEntityLink), MapEntityLink.SIZE);
       typeRegistry.Register(typeof(Quantum.Minion), Quantum.Minion.SIZE);
       typeRegistry.Register(typeof(Quantum.MinionState), 4);
+      typeRegistry.Register(typeof(Quantum.MinionWaveSettings), Quantum.MinionWaveSettings.SIZE);
       typeRegistry.Register(typeof(Quantum.MinionWaveSpawner), Quantum.MinionWaveSpawner.SIZE);
       typeRegistry.Register(typeof(NavMeshAvoidanceAgent), NavMeshAvoidanceAgent.SIZE);
       typeRegistry.Register(typeof(NavMeshAvoidanceObstacle), NavMeshAvoidanceObstacle.SIZE);
@@ -1860,7 +1942,7 @@ namespace Quantum {
       typeRegistry.Register(typeof(Quantum._globals_), Quantum._globals_.SIZE);
     }
     static partial void InitComponentTypeIdGen() {
-      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 18)
+      ComponentTypeId.Reset(ComponentTypeId.BuiltInComponentCount + 19)
         .AddBuiltInComponents()
         .Add<AIBlackboardComponent>(AIBlackboardComponent.Serialize, AIBlackboardComponent.OnAdded, AIBlackboardComponent.OnRemoved, ComponentFlags.None)
         .Add<BTAgent>(BTAgent.Serialize, BTAgent.OnAdded, BTAgent.OnRemoved, ComponentFlags.None)
@@ -1874,7 +1956,8 @@ namespace Quantum {
         .Add<Quantum.LagCompensationProxy>(Quantum.LagCompensationProxy.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.LagCompensationTarget>(Quantum.LagCompensationTarget.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Minion>(Quantum.Minion.Serialize, null, null, ComponentFlags.None)
-        .Add<Quantum.MinionWaveSpawner>(Quantum.MinionWaveSpawner.Serialize, null, Quantum.MinionWaveSpawner.OnRemoved, ComponentFlags.None)
+        .Add<Quantum.MinionWaveSettings>(Quantum.MinionWaveSettings.Serialize, null, null, ComponentFlags.None)
+        .Add<Quantum.MinionWaveSpawner>(Quantum.MinionWaveSpawner.Serialize, Quantum.MinionWaveSpawner.OnAdded, Quantum.MinionWaveSpawner.OnRemoved, ComponentFlags.None)
         .Add<Quantum.Pickup>(Quantum.Pickup.Serialize, null, null, ComponentFlags.None)
         .Add<Quantum.Player>(Quantum.Player.Serialize, null, null, ComponentFlags.None)
         .Add<UTAgent>(UTAgent.Serialize, UTAgent.OnAdded, UTAgent.OnRemoved, ComponentFlags.None)

@@ -34,5 +34,9 @@ namespace Quantum
 	public partial class RuntimeConfig
 	{
 		public CollectorsSampleRuntimeConfig CollectorsSampleConfig;
+
+		// Prototypes for team-specific spawn-managers.
+		// Each prototype must include MinionWaveSpawner + MinionWaveSettings components.
+
 	}
 }
